@@ -71,7 +71,15 @@ cards = [
                         ' термопластиковая резина',
          'quantity': 85,
          'image': '/static/vendor/img/products/bott.jpg'
-     }]
+     }, {
+         'name': 'ZYYZYM',
+         'price': 15590.00,
+         'description': 'ZYYZYM Мужская парусиновая обувь, на шнуровке, '
+                        'дышащая, модная, Вулканизированная, молодежная '
+                        'обувь для студентов, большие размеры 45-46',
+         'quantity': 82,
+         'image': '/static/vendor/img/products/tuth_red.jpg'
+     }, ]
      }
 ]
 
