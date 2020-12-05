@@ -36,9 +36,9 @@
         <h5 style="color: #1e7e34">{{ key.categ }}</h5>
         {% for goods_item in  key.goods %}
             <div style="display: inline-block">
-                <div>
+                <div style="margin: 20px">
                     <p style="max-width: 250px">{{ goods_item.name }}</p>
-                    <img src="{{ goods_item.image }}" width="200" alt="#">
+                    <img src="{{ goods_item.image }}" width="250" alt="#">
                     <p>{{ goods_item.price }} руб.</p>
                     <p style="max-width: 250px">{{ goods_item.description }}</p>
                     <button>Купить</button>
