@@ -1,10 +1,10 @@
-{% extends 'mainapp/base.html' %}
+{% extends "mainapp/base.html" %}
 {% load static %}
 {% block page_title %}
     <title xmlns="http://www.w3.org/1999/html">GeekShop/{{ title|title }}</title>
 {% endblock %}
 {% block css %}
-    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+    <link href="{% static "css/index.css" %}" rel="stylesheet">
 
 {% endblock %}
 {% block content %}
@@ -19,7 +19,7 @@
                         Бесплатная доставка по всему миру! Аутлет: до -70% Собственный бренд. -20% новым покупателям.
                     </p>
                     <button id="start-purchase-btn" type="button" class="btn btn-lg">
-                        <a id="start-purchase-link" href="{% url 'products' %}">
+                        <a id="start-purchase-link" href="{% url "products" %}">
                             Начать покупки
                         </a>
                     </button>
@@ -30,28 +30,6 @@
 
 {% endblock %}
 
-{% block img_pro %}
-    <h4 style="text-align: left">Все продукты магазина по категориям коллекции {% now 'Y' %} года на дату : {% now 'd.m.Y г.' %}</h4>
-    {% for key in prs %}
-        <h5 style="color: #1e7e34">{{ key.categ }}</h5>
-        {% for goods_item in  key.goods %}
-            <div style="display: inline-block">
-                <div style="margin: 20px">
-                    <p style="max-width: 250px">{{ goods_item.name }}</p>
-                    <img src="{{ goods_item.image }}" width="250" alt="#">
-                    <p>{{ goods_item.price }} руб.</p>
-                    <p style="max-width: 250px">{{ goods_item.description }}</p>
-                    <button>Купить</button>
-                </div>
-            </div>
 
-
-
-        {% endfor %}
-
-        {#        <img src="{{ key.goods.0.image }}" width="200" alt="">#}
-    {% endfor %}
-
-{% endblock %}
 
 
