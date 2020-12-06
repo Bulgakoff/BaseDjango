@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="889f976f-3a8f-41c0-9733-0c19c58950ee" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/geekshop/geekshop/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/geekshop/geekshop/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/geekshop/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +204,7 @@
       <workItem from="1607013833508" duration="15578000" />
       <workItem from="1607038452543" duration="17847000" />
       <workItem from="1607166690400" duration="3028000" />
-      <workItem from="1607238722075" duration="14606000" />
+      <workItem from="1607238722075" duration="15000000" />
     </task>
     <servers />
   </component>
