@@ -6,8 +6,8 @@
 </head>
 <body>
 <div>{{ title|title }}</div>
-<a id="start-purchase-link" href="{% url 'products' %}">products</a>
-<a id="start-purchase-link" href="{% url 'index' %}">index</a>
+<a href="{% url 'products' %}">products</a>
+<a href="{% url 'index' %}">index</a>
 <p>User: {{ username }}</p>
 <h3>ваши продукты:</h3>
 {% for good in goods %}

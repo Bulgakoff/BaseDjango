@@ -4,7 +4,7 @@
     <title xmlns="http://www.w3.org/1999/html">GeekShop/{{ title|title }}</title>
 {% endblock %}
 {% block css %}
-    <link href="{% static "css/index.css" %}" rel="stylesheet">
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
 
 {% endblock %}
 {% block content %}
@@ -19,7 +19,7 @@
                         Бесплатная доставка по всему миру! Аутлет: до -70% Собственный бренд. -20% новым покупателям.
                     </p>
                     <button id="start-purchase-btn" type="button" class="btn btn-lg">
-                        <a id="start-purchase-link" href="{% url "products" %}">
+                        <a id="start-purchase-link" href="{% url 'products' %}">
                             Начать покупки
                         </a>
                     </button>
