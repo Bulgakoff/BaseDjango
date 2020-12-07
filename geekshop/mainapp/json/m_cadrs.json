@@ -1,0 +1,20 @@
+{
+    "title": "weelcom",
+    "username": "ALex",
+    "goods": [
+        {
+            "name": "\u0414\u0436\u0438\u043d\u0441\u044b",
+            "price": 4500
+        },
+        {
+            "name": "\u0422\u043e\u043b\u0441\u0442\u043e\u0432\u043a\u0430",
+            "price": 1500
+        }
+    ],
+    "promotion_prods": [
+        {
+            "name": "\u0422\u0443\u0444\u043b\u0438",
+            "price": 2100
+        }
+    ]
+}
