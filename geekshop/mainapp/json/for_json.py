@@ -4,7 +4,7 @@ from pprint import pprint
 data = {'title': 'weelcom',
         'username': 'ALex',
         'goods': [
-            {'name': 'Джинсы', 'price': 4500},
+            {'name': 'Джинсы', 'price': 568},
             {'name': 'Толстовка', 'price': 1500},
         ],
         # 'promotion': True,
