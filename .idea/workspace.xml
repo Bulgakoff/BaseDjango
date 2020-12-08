@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="889f976f-3a8f-41c0-9733-0c19c58950ee" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/geekshop/mainapp/json/for_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/geekshop/mainapp/json/for_json.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/geekshop/mainapp/json/m_cadrs.json" beforeDir="false" afterPath="$PROJECT_DIR$/geekshop/mainapp/json/m_cadrs.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/geekshop/mainapp/templates/mainapp/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/geekshop/mainapp/templates/mainapp/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geekshop/db.sqlite3" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,6 +210,7 @@
       <workItem from="1607324257494" duration="667000" />
       <workItem from="1607324927402" duration="5991000" />
       <workItem from="1607335036866" duration="5499000" />
+      <workItem from="1607427733031" duration="714000" />
     </task>
     <servers />
   </component>
@@ -218,6 +218,10 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1607428098415">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607428098415" />
     <state x="771" y="350" key="FileChooserDialogImpl" timestamp="1607324917557">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
