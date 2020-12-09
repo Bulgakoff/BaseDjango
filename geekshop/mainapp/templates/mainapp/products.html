@@ -19,8 +19,8 @@
 
             <h1 class="my-4">GeekShop</h1>
             <div class="list-group">
-                 {% for product in prds_db %}
-                <a href="#" class="list-group-item">{{ product.category.name }}</a>
+                 {% for category in categs_db %}
+                <a href="#" class="list-group-item">{{ category.name }}</a>
                  {% endfor %}
             </div>
 
@@ -96,8 +96,7 @@
 <!-- /.container -->
 {% endblock %}
 {% block img_pro %}
-<h4 style="text-align: left">Все продукты магазина по категориям коллекции {% now "Y" %} года на дату : {% now "d.m.Y
-    г." %}</h4>
+<h4 style="text-align: left">Все продукты магазина по категориям коллекции {% now "Y" %} года на дату : {% now "d.m.Y г." %}</h4>
 {% for key in prs %}
 <h5 style="color: #1e7e34">{{ key.categ }}</h5>
 {% for goods_item in  key.goods %}

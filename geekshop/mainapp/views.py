@@ -2,8 +2,6 @@ from django.shortcuts import render
 import json
 from mainapp.models import ProductCategory, Products
 
-
-
 JSON_PATH = 'mainapp/json/'
 
 
@@ -12,9 +10,7 @@ def json_from(file_json):
         return json.load(f)
 
 
-
 def index(request):
-
     context = {
         'title': 'главная',
     }
@@ -24,10 +20,13 @@ def index(request):
 def products(request):
     json_products = json_from('cloth_cadrs.json')
     products_db = Products.objects.all()
+    categories_db = ProductCategory.objects.all()
+
     context = {
         'title': 'продукты',
-        'prs': json_products,
+        # 'prs': json_products,
         'prds_db': products_db,
+        'categs_db': categories_db,
     }
     return render(request, 'mainapp/products.html', context)
 
