@@ -9,8 +9,6 @@ urlpatterns = [
     path('admin/',  admin.site.urls),
     path('', mainapp_views.index, name='index'),
     path('products/', mainapp_views.products, name='products'),
-    path('ttt/', mainapp_views.contex, name='contex'),
-    path('new/', mainapp_views.new, name='new'),
 
 ]
 
