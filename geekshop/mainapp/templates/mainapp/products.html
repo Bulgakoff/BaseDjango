@@ -95,28 +95,7 @@
 </div>
 <!-- /.container -->
 {% endblock %}
-{% block img_pro %}
-<h4 style="text-align: left">Все продукты магазина по категориям коллекции {% now "Y" %} года на дату : {% now "d.m.Y г." %}</h4>
-{% for key in prs %}
-<h5 style="color: #1e7e34">{{ key.categ }}</h5>
-{% for goods_item in  key.goods %}
-<div style="display: inline-block">
-    <div style="margin: 20px">
-        <p style="max-width: 250px">{{ goods_item.name }}</p>
-        <img src="{{ goods_item.image }}" width="250" alt="#">
-        <p>{{ goods_item.price }} руб.</p>
-        <p style="max-width: 250px">{{ goods_item.description }}</p>
-        <button>Купить</button>
-    </div>
-</div>
 
-
-{% endfor %}
-
-{#        <img src="{{ key.goods.0.image }}" width="200" alt="">#}
-{% endfor %}
-
-{% endblock %}
 {% block footer %}
 <!-- Footer -->
 <footer class="py-5 bg-dark">
