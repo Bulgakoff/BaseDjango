@@ -1,5 +1,5 @@
-.idea/
+.idea
 geekshop/db.sqlite3
 geekshop/README.md
 __pycache__/
-
+media/
