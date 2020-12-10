@@ -1,38 +1,25 @@
 from django.shortcuts import render
-import json
-import os
-
-# Create your views here.
-JSON_PATH = 'mainapp/json/'
+from mainapp.models import ProductCategory, Products
 
 
-def json_from(file_json):
-    with open(JSON_PATH + file_json, 'r', encoding='utf-8') as f:
-        return json.load(f)
 
-
-# в индексе передвть конткст названия загаловка сайта на заголовке
-# продуктов  написано geekshop / products
-def index(request):  # отрисовывает страницу по запросу
-    # и отображает в ней разные данные динамически
-
+def index(request):
     context = {
         'title': 'главная',
     }
-    return render(request, 'mainapp/index.html', context)  # по такой локации
+    return render(request, 'mainapp/index.html', context)
 
 
-#  в прод products контекст из продуктов и отобразить в одном div продукты
 def products(request):
-    json_products = json_from('cloth_cadrs.json')
+    products_db = Products.objects.all()
+    categories_db = ProductCategory.objects.all()
+
     context = {
         'title': 'продукты',
-        'prs': json_products,
+        'prds_db': products_db,
+        'categs_db': categories_db,
     }
     return render(request, 'mainapp/products.html', context)
 
 
-def contex(request):
-    context = json_from('m_cadrs.json')
 
-    return render(request, 'mainapp/contex.html', context)
