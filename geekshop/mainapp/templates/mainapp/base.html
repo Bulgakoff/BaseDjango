@@ -39,7 +39,7 @@
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'authapp:login' %}">{{ user.username }} <i
+                        <a class="nav-link" href="{% url 'authapp:profile' %}">{{ user.username }} <i
                                 class="fas fa-user-circle"></i></a>
                     </li>{% url 'authapp:login' %}
                     <li class="nav-item">
