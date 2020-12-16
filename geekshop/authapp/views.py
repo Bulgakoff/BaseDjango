@@ -3,6 +3,8 @@ from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
 from django.contrib import auth, messages
 from django.urls import reverse
 
+from basketapp.models import Basket
+
 
 def login(request):
     if request.method == 'POST':
@@ -30,10 +32,14 @@ def profile(request):
         form = UserProfileForm(data=request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('authapp:profile'))
+            return HttpResponseRedirect(reverse('auth:profile'))
     else:
         form = UserProfileForm(instance=request.user)
-    context = {'form': form}
+
+    context = {
+        'form': form,
+        'baskets': Basket.objects.filter(user=request.user),
+    }
     return render(request, 'authapp/profile.html', context)
 
 
@@ -43,10 +49,10 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Регистрация прошла успешно')
-            return HttpResponseRedirect(reverse('authapp:login'))
+            return HttpResponseRedirect(reverse('auth:login'))
     form = UserRegisterForm()
     contex = {
         'form': form,
     }
 
-    return render(request, 'authapp/register.html', contex)
+    return render(request, 'authapp/profile.html', contex)
