@@ -22,3 +22,9 @@ def basket_remove(request, id=None):
     basket = Basket.objects.get(id=id)
     basket.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+# def baskete(request, id=None):
+#     basket = Basket.objects.get(id=id)
+#     basket.delete()
+#     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
