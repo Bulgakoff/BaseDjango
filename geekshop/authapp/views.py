@@ -3,7 +3,6 @@ from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
 from django.contrib import auth, messages
 from django.urls import reverse
 
-
 from basketapp.models import Basket
 
 
@@ -17,6 +16,13 @@ def login(request):
             if user and user.is_active:
                 auth.login(request, user)
                 return HttpResponseRedirect(reverse('main'))
+            else:
+                messages.error(request, 'Ваш акаунт не активен!!!')
+                return render(request, 'authapp/login.html')
+        else:
+            messages.error(request, 'Неверные данные для входа в систему.')
+            return render(request, 'authapp/login.html')
+
     else:
         form = UserLoginForm()
     context = {'form': form}
@@ -34,6 +40,9 @@ def profile(request):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('auth:profile'))
+        else:
+            messages.error(request, 'Введены данные не корректно')
+            return render(request, 'authapp/login.html')
     else:
         form = UserProfileForm(instance=request.user)
 
@@ -50,6 +59,9 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Регистрация прошла успешно')
+            return HttpResponseRedirect(reverse('auth:login'))
+        else:
+            messages.error(request, 'Регистрация прошла провалилась')
             return HttpResponseRedirect(reverse('auth:login'))
     form = UserRegisterForm()
     contex = {

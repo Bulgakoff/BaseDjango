@@ -2,6 +2,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, User
 from authapp.models import User
 from django import forms
 
+
 class UserLoginForm(AuthenticationForm):
     class Meta:
         model = User
@@ -19,24 +20,34 @@ class UserLoginForm(AuthenticationForm):
 class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
+        fields = ('username', 'email', 'age', 'first_name', 'last_name', 'password1', 'password2')
 
     def __init__(self, *args, **kwargs):
         super(UserRegisterForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control py-4'
+            field.help_text = ''
         self.fields['username'].widget.attrs['placeholder'] = 'Введите имя пользователя'
         self.fields['password1'].widget.attrs['placeholder'] = 'Введите пароль'
         self.fields['password2'].widget.attrs['placeholder'] = 'Подтвердите  пароль'
         self.fields['email'].widget.attrs['placeholder'] = 'Введите email'
         self.fields['first_name'].widget.attrs['placeholder'] = 'Введите имя'
         self.fields['last_name'].widget.attrs['placeholder'] = 'Введите Фамилию'
+        self.fields['age'].widget.attrs['placeholder'] = 'Введите возраст'
+        # self.fields['avatar'].widget.attrs['placeholder'] = 'Введите avatar'
 
-        for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control py-4'
-            field.help_text = ''
+
+    def clean_age(self):
+        data = self.cleaned_data['age']
+        if data < 18:
+            raise forms.ValidationError("Вы слишком молоды!")
+
+        return data
 
 
 class UserProfileForm(UserChangeForm):
-    avatar=forms.ImageField(widget=forms.FileInput())
+    avatar = forms.ImageField(widget=forms.FileInput())
+
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'avatar', 'username', 'email')
