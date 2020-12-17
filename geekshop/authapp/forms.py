@@ -36,7 +36,6 @@ class UserRegisterForm(UserCreationForm):
         self.fields['age'].widget.attrs['placeholder'] = 'Введите возраст'
         # self.fields['avatar'].widget.attrs['placeholder'] = 'Введите avatar'
 
-
     def clean_age(self):
         data = self.cleaned_data['age']
         if data < 18:
