@@ -5,8 +5,12 @@ window.onload=function () {
             url: "/baskets/edit/" + elem.name + "/" + elem.value + "/",
             success: function (data) {
                 $('.basket_list').html(data.result)
+                console.log(data)
             },
         })
+        console.log(elem.name, elem.value)
+
+
     });
     event.preventDefault();
 }
