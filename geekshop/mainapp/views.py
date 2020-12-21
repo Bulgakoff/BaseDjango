@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import HttpResponseRedirect, get_object_or_404
 from mainapp.models import ProductCategory, Products
 
 
@@ -10,12 +11,13 @@ def index(request):
 
 
 def products(request, pk=None):
+    print(f'вы выбрали {pk}')
     products_db = Products.objects.all()
-    categories_db = ProductCategory.objects.all()
+    links_menu = ProductCategory.objects.all()
 
     context = {
         'title': 'продукты',
         'prds_db': products_db,
-        'categs_db': categories_db,
+        'links_menu': links_menu,
     }
     return render(request, 'mainapp/products.html', context)
