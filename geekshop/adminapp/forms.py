@@ -1,5 +1,6 @@
-from authapp.forms import UserRegisterForm, UserProfileForm
+from authapp.forms import UserRegisterForm, UserProfileForm, UserLoginForm
 from authapp.models import User
+from mainapp.models import ProductCategory
 from django import forms
 
 
@@ -20,3 +21,16 @@ class UserAdminProfileForm(UserProfileForm):
         super(UserAdminProfileForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['readonly'] = False
         self.fields['email'].widget.attrs['readonly'] = False
+
+
+class CategoryAdminRegisterForm(forms.Form):
+    model = ProductCategory
+    name = forms.CharField()
+    description = forms.TimeField()
+
+
+class CategoryAdminUpdateForm(UserAdminProfileForm):
+    def __init__(self, *args, **kwargs):
+        super(CategoryAdminUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs['readonly'] = False
+        self.fields['description'].widget.attrs['readonly'] = False
