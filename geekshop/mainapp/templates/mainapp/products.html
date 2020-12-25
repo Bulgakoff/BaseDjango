@@ -14,7 +14,19 @@
 
         <div class="row">
 
-            {% include 'mainapp\includes\inc__category_menu.html' %}
+            <div class="col-lg-3">
+
+                <h1 class="my-4">GeekShop</h1>
+                <div class="list-group">
+                    {% for category in links_menu %}
+                        <a href="{% url 'mainapp:products' category.id %}"
+                           class="list-group-item">
+                            {{ category.name }}
+                        </a>
+                    {% endfor %}
+                </div>
+
+            </div>
 
             <div class="col-lg-9">
 
@@ -49,7 +61,7 @@
                 </div>
 
                 <div class="row">
-                    {% for product in prds_db %}
+                    {% for product in products %}
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="card h-100">
                                 <a href="#">
