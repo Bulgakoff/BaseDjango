@@ -5,21 +5,26 @@ from adminapp.forms import UserAdminRegisterForm, UserAdminProfileForm, Category
     CategoryAdminUpdateForm
 from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
+
 from django.contrib import messages
 
+from django.views.generic.list import ListView
 
 # Create your views here.
 @user_passes_test(lambda user: user.is_superuser)
 def index(request):
     return render(request, 'adminapp/index.html')
 
+class UseristView(ListView):
+    model = User
+    template_name = 'adminapp/admin-users-read.html'
 
-@user_passes_test(lambda user: user.is_superuser)
-def admin_users(request):
-    context = {
-        'users': User.objects.all()
-    }
-    return render(request, 'adminapp/admin-users-read.html', context)
+# @user_passes_test(lambda user: user.is_superuser)
+# def admin_users(request):
+#     context = {
+#         'users': User.objects.all()
+#     }
+#     return render(request, 'adminapp/admin-users-read.html', context)
 
 
 @user_passes_test(lambda user: user.is_superuser)
