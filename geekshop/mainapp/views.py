@@ -4,6 +4,7 @@ from mainapp.models import ProductCategory, Products
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
+
 def index(request):
     context = {
         'title': 'главная',
@@ -12,24 +13,25 @@ def index(request):
 
 
 def products(request, category_id=None, page=1):
-    context = {
-        'title': 'продукты -  КАТЕГОРИИ',
-        'links_menu': ProductCategory.objects.all(),
-    }
+    """Without pagination."""
+    context = {'title': 'продукты -  КАТЕГОРИИ', 'links_menu': ProductCategory.objects.all(), }
     if category_id:
         print(f'вы выбрали {category_id}')
-        products = Products.objects.filter(category_id=category_id)
+        products = Products.objects.filter(category_id=category_id).order_by('price')
         # context.update({'products': products})
     else:
-        products = Products.objects.all()
+        products = Products.objects.all().order_by('price')
         # context.update({'products': products})
-    paginanor = Paginator(products, 3)
+    paginator = Paginator(products, 3)
     try:
-        products_paginanor = paginanor.page(page)
+        products_paginator = paginator.page(page)
     except PageNotAnInteger:
-        products_paginanor = paginanor.page()
+        products_paginator = paginator.page(1)
     except EmptyPage:
-        products_paginanor = paginanor.page(paginanor.num_pages)
-    context.update({products_paginanor})
+        products_paginator = paginator.page(paginator.num_pages)
+    context.update({'products': products_paginator})
 
     return render(request, 'mainapp/products.html', context)
+
+
+
