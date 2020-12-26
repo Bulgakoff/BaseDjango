@@ -98,10 +98,9 @@ def admin_category_create(request):
 def admin_category_update(request, categ_id):
     category = ProductCategory.objects.get(id=categ_id)
     if request.method == 'POST':
-        form = CategoryAdminUpdateForm(data=request.POST)
+        form = CategoryAdminUpdateForm(request.POST or None, instance=category)
         if form.is_valid():
             form.save()
-
             return HttpResponseRedirect(reverse('admin_staff:admin_category'))
         else:
             return HttpResponseRedirect(reverse('admin_staff:admin_category'))
@@ -117,8 +116,7 @@ def admin_category_delete(request, categ_id):
     print(f'--------------------------------------------------{categ_id}')
     category = ProductCategory.objects.get(id=categ_id)
     print(f'-------------------------------------------------->{category}')
-    if category:
-        category.delete()
-        return HttpResponseRedirect(reverse('admin_staff:admin_category'))
+    category.is_active = False
+    category.save()
 
-    return render(request, 'adminapp/admin-category-update-delete.html')
+    return HttpResponseRedirect(reverse('admin_staff:admin_category'))

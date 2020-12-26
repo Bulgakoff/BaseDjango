@@ -22,6 +22,7 @@ class UserAdminProfileForm(UserProfileForm):
         self.fields['username'].widget.attrs['readonly'] = False
         self.fields['email'].widget.attrs['readonly'] = False
 
+
 # ===================Category================================================
 class CategoryAdminRegisterForm(forms.ModelForm):
     class Meta:
