@@ -9,6 +9,7 @@ urlpatterns = [
     path('users/create/', adminapp.admin_users_create, name='admin_users_create'),
     path('users/update/<int:user_pk>/', adminapp.admin_users_update, name='admin_users_update'),
     path('users/remove/<int:user_id>/', adminapp.admin_users_remove, name='admin_users_remove'),
+
     path('users/category/', adminapp.admin_category, name='admin_category'),
     path('users/category/create/', adminapp.admin_category_create, name='admin_category_create'),
     path('users/category/update/<int:categ_id>/', adminapp.admin_category_update, name='admin_category_update'),
