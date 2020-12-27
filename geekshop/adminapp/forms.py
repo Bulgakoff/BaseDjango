@@ -23,14 +23,13 @@ class UserAdminProfileForm(UserProfileForm):
         self.fields['email'].widget.attrs['readonly'] = False
 
 
-class CategoryAdminRegisterForm(forms.Form):
-    model = ProductCategory
-    name = forms.CharField()
-    description = forms.TimeField()
+# ===================Category================================================
+class CategoryAdminRegisterForm(forms.ModelForm):
+    class Meta:
+        model = ProductCategory
+        fields = ('name', 'description',)
 
 
-class CategoryAdminUpdateForm(UserAdminProfileForm):
+class CategoryAdminUpdateForm(CategoryAdminRegisterForm):
     def __init__(self, *args, **kwargs):
         super(CategoryAdminUpdateForm, self).__init__(*args, **kwargs)
-        self.fields['name'].widget.attrs['readonly'] = False
-        self.fields['description'].widget.attrs['readonly'] = False

@@ -2,7 +2,7 @@
 {% block content %}
     <h1 class="mt-4">Редактирование категорий | {{ category.name }}</h1>
     <div class="card-body">
-        <form action="{% url 'admin_staff:admin_category_update' category.id%}" method="post"
+        <form action="{% url 'admin_staff:admin_category_update' category.id %}" method="post"
               enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-row">
@@ -28,8 +28,8 @@
         <div class="row">
             <div class="col-lg-12" style="margin-top: 33px;">
                 <a href="{% url 'admin_staff:admin_category_delete' category.id %}">
-{#                <a href="#">#}
-                    <input class="btn btn-danger btn-block" type="submit" value="Удалить">
+                    {#                <a href="#">#}
+                    <input class="btn btn-danger btn-block" type="submit" value="Deactivate">
                 </a>
             </div>
         </div>

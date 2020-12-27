@@ -8,14 +8,14 @@
                 <thead>
                 <tr>
                     <th>Название категории</th>
-                    {#                    <th>Персонал сайта</th>#}
+                    <th>Описание категории</th>
                     <th style="text-align: center">Активность категории</th>
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
                     <th>Название категории</th>
-                    {#                    <th>Персонал сайта</th>#}
+                    <th>Описание категории</th>
                     <th style="text-align: center">Активность категории</th>
                 </tr>
                 </tfoot>
@@ -23,20 +23,21 @@
                 {% for category in categories %}
                     <tr>
                         <td>
-                            <a href="{% url 'admin_staff:admin_category_update' category.id %}" style="color: dodgerblue">
+                            <a href="{% url 'admin_staff:admin_category_update' category.id %}"
+                               style="color: dodgerblue">
                                 {{ category.name }}
                             </a>
-                            <td>{{ category.description }}</td>
+                        <td>{{ category.description }}</td>
                         </td>
-{#                        <td class="text-center">#}
-{#                            {% if category.is_staff %}#}
-{#                                <i class="fas fa-check-circle"></i>#}
-{#                            {% else %}#}
-{#                                <i class="fas fa-times-circle"></i>#}
-{#                            {% endif %}#}
-{#                        </td>#}
+                        {#                        <td class="text-center">#}
+                        {#                            {% if category.is_staff %}#}
+                        {#                                <i class="fas fa-check-circle"></i>#}
+                        {#                            {% else %}#}
+                        {#                                <i class="fas fa-times-circle"></i>#}
+                        {#                            {% endif %}#}
+                        {#                        </td>#}
                         <td class="text-center">
-                            {% if category %}
+                            {% if category.is_active %}
                                 <i class="fas fa-check-circle"></i>
                             {% else %}
                                 <i class="fas fa-times-circle"></i>

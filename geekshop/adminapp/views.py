@@ -1,19 +1,26 @@
 from django.shortcuts import render, HttpResponseRedirect
 from authapp.models import User
 from mainapp.models import ProductCategory
-from adminapp.forms import UserAdminRegisterForm, UserAdminProfileForm, CategoryAdminRegisterForm
+from adminapp.forms import UserAdminRegisterForm, UserAdminProfileForm, CategoryAdminRegisterForm, \
+    CategoryAdminUpdateForm
 from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
+
+from django.contrib import messages
+
 from django.views.generic.list import ListView
+
 
 # Create your views here.
 @user_passes_test(lambda user: user.is_superuser)
 def index(request):
     return render(request, 'adminapp/index.html')
 
+
 class UserListView(ListView):
     model = User
     template_name = 'adminapp/admin-users-read.html'
+
 
 # @user_passes_test(lambda user: user.is_superuser)
 # def admin_users(request):
@@ -33,11 +40,11 @@ def admin_users_create(request):
         else:
             return HttpResponseRedirect(reverse('admin_staff:admin_category_create'))
     form = UserAdminRegisterForm()
-    contex = {
+    context = {
         'form': form,
     }
 
-    return render(request, 'adminapp/admin-users-create.html', contex)
+    return render(request, 'adminapp/admin-users-create.html', context)
 
 
 @user_passes_test(lambda user: user.is_superuser)
@@ -70,6 +77,8 @@ def admin_users_remove(request, user_id=None):
     return HttpResponseRedirect(reverse('admin_staff:admin_users'))
 
 
+# ==============================categories=============================================================== #
+
 def admin_category(request):
     categories = ProductCategory.objects.all()
     context = {
@@ -85,33 +94,37 @@ def admin_category_create(request):
             form.save()
             return HttpResponseRedirect(reverse('admin_staff:admin_category'))
         else:
+            messages.error('Что-то не так!!!')
             return HttpResponseRedirect(reverse('admin_staff:admin_category'))
     form = CategoryAdminRegisterForm()
-    contex = {
+    context = {
         'form': form,
     }
-
-    return render(request, 'adminapp/admin-category-create.html', contex)
+    return render(request, 'adminapp/admin-category-create.html', context)
 
 
 def admin_category_update(request, categ_id):
     category = ProductCategory.objects.get(id=categ_id)
     if request.method == 'POST':
-        form = CategoryAdminRegisterForm(data=request.POST)
+        form = CategoryAdminUpdateForm(request.POST or None, instance=category)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('admin_staff:admin_category'))
         else:
             return HttpResponseRedirect(reverse('admin_staff:admin_category'))
-    form = CategoryAdminRegisterForm()
-    contex = {
+    form = CategoryAdminUpdateForm()
+    context = {
         'form': form,
         'category': category,
     }
-    return render(request, 'adminapp/admin-category-update-delete.html', contex)
+    return render(request, 'adminapp/admin-category-update-delete.html', context)
+
 
 def admin_category_delete(request, categ_id):
+    print(f'--------------------------------------------------{categ_id}')
     category = ProductCategory.objects.get(id=categ_id)
-    category.delete()
+    print(f'-------------------------------------------------->{category}')
+    category.is_active = False
+    category.save()
 
-    return render(request, 'adminapp/admin-category-update-delete.html')
+    return HttpResponseRedirect(reverse('admin_staff:admin_category'))
