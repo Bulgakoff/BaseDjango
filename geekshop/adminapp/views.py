@@ -10,14 +10,17 @@ from django.contrib import messages
 
 from django.views.generic.list import ListView
 
+
 # Create your views here.
 @user_passes_test(lambda user: user.is_superuser)
 def index(request):
     return render(request, 'adminapp/index.html')
 
+
 class UseristView(ListView):
     model = User
     template_name = 'adminapp/admin-users-read.html'
+
 
 # @user_passes_test(lambda user: user.is_superuser)
 # def admin_users(request):

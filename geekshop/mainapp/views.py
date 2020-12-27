@@ -4,7 +4,6 @@ from mainapp.models import ProductCategory, Products
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-
 def index(request):
     context = {
         'title': 'главная',
@@ -32,6 +31,3 @@ def products(request, category_id=None, page=1):
     context.update({'products': products_paginator})
 
     return render(request, 'mainapp/products.html', context)
-
-
-
