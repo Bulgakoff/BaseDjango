@@ -11,7 +11,7 @@ from django.views.generic.list import ListView
 def index(request):
     return render(request, 'adminapp/index.html')
 
-class UseristView(ListView):
+class UserListView(ListView):
     model = User
     template_name = 'adminapp/admin-users-read.html'
 
