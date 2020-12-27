@@ -17,11 +17,13 @@ def login(request):
                 auth.login(request, user)
                 return HttpResponseRedirect(reverse('main'))
             else:
+                context = {'form': form}
                 messages.error(request, 'Ваш акаунт не активен!!!')
-                return render(request, 'authapp/login.html')
+                return render(request, 'authapp/login.html', context)
         else:
+            context = {'form': form}
             messages.error(request, 'Неверные данные для входа в систему.')
-            return render(request, 'authapp/login.html')
+            return render(request, 'authapp/login.html', context)
 
     else:
         form = UserLoginForm()

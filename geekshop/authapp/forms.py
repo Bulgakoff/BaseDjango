@@ -20,7 +20,7 @@ class UserLoginForm(AuthenticationForm):
 class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('username', 'email', 'age', 'first_name', 'last_name', 'password1', 'password2')
+        fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
 
     def __init__(self, *args, **kwargs):
         super(UserRegisterForm, self).__init__(*args, **kwargs)
@@ -33,15 +33,15 @@ class UserRegisterForm(UserCreationForm):
         self.fields['email'].widget.attrs['placeholder'] = 'Введите email'
         self.fields['first_name'].widget.attrs['placeholder'] = 'Введите имя'
         self.fields['last_name'].widget.attrs['placeholder'] = 'Введите Фамилию'
-        self.fields['age'].widget.attrs['placeholder'] = 'Введите возраст'
+        # self.fields['age'].widget.attrs['placeholder'] = 'Введите возраст'
         # self.fields['avatar'].widget.attrs['placeholder'] = 'Введите avatar'
 
-    def clean_age(self):
-        data = self.cleaned_data['age']
-        if data < 18:
-            raise forms.ValidationError("Вы слишком молоды!")
-
-        return data
+    # def clean_age(self):
+    #     data = self.cleaned_data['age']
+    #     if data < 18:
+    #         raise forms.ValidationError("Вы слишком молоды!")
+    #
+    #     return data
 
 
 class UserProfileForm(UserChangeForm):
