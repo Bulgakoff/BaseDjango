@@ -20,7 +20,7 @@
                 </tr>
                 </tfoot>
                 <tbody>
-                {% for category in categories %}
+                {% for category in object_list %}
                     <tr>
                         <td>
                             <a href="{% url 'admin_staff:admin_category_update' category.id %}"
