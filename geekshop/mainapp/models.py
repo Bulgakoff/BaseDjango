@@ -6,8 +6,6 @@ class ProductCategory(models.Model):
     description = models.TextField(blank=True)
     is_active = models.BooleanField(default=True)
 
-
-
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
