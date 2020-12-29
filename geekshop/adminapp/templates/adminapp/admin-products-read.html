@@ -13,42 +13,45 @@
                     <thead>
                     <tr>
                         <th>Наименование продуктов</th>
-                        <th>Наименование</th>
-                        <th>Описпние продуктов</th>
+                        <th>Описание продуктов</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th>Категория</th>
                         <th>Активность(Удаление)</th>
+
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
                         <th>Наименование продуктов</th>
-                        <th>Наименование</th>
-                        <th>Описпние продуктов</th>
+                        <th>Описание продуктов</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th>Категория</th>
                         <th>Активность(Удаление)</th>
                     </tr>
                     </tfoot>
                     <tbody>
-                    {% for user in object_list %}
+                    {% for product in object_list %}
                         <tr>
                             <td>
-{#                                <a href="{% url 'admin_staff:admin_users_update' user.id %}" style="color: dodgerblue">#}
-                                <a href="#" style="color: dodgerblue">
-                                    {{ user.name }}
+                                {#                                <a href="{% url 'admin_staff:admin_users_update' user.id %}" style="color: dodgerblue">#}
+                                <a href="{% url 'adminapp:admin_products_update' product.id %}"
+                                   style="color: dodgerblue">
+                                    {{ product.name }}
                                 </a>
                             </td>
+                            <td>{{ product.short_description }}</td>
+                            <td>{{ product.price }}</td>
+                            <td>{{ product.guantity }}</td>
+                            <td>{{ product.category }}</td>
                             <td class="text-center">
-                                {% if user %}
+                                {% if product.category.is_active %}
                                     <i class="fas fa-check-circle"></i>
                                 {% else %}
                                     <i class="fas fa-times-circle"></i>
                                 {% endif %}
                             </td>
-{#                            <td class="text-center">#}
-{#                                {% if user.is_active %}#}
-{#                                    <i class="fas fa-check-circle"></i>#}
-{#                                {% else %}#}
-{#                                    <i class="fas fa-times-circle"></i>#}
-{#                                {% endif %}#}
-{#                            </td>#}
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -57,8 +60,8 @@
         </div>
         <div class="card-footer">
             <button class="btn btn-success">
-{#                <a href="{% url 'admin_staff:admin_users_create' %}" style="color: white;">#}
-                <a href="#" style="color: white;">
+                {#                <a href="{% url 'admin_staff:admin_users_create' %}" style="color: white;">#}
+                <a href="{% url 'admin_staff:admin_products_create' %}" style="color: white;">
                     Создать продукт
                 </a>
             </button>

@@ -3,7 +3,7 @@ from authapp.models import User
 from mainapp.models import ProductCategory
 from mainapp.models import Products
 from adminapp.forms import UserAdminRegisterForm, UserAdminProfileForm, CategoryAdminRegisterForm, \
-    CategoryAdminUpdateForm
+    CategoryAdminUpdateForm, ProductAdminRegisterForm, ProductAdminUpdateForm
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import user_passes_test
 from django.utils.decorators import method_decorator
@@ -17,11 +17,6 @@ from django.views.generic.list import ListView
 @user_passes_test(lambda user: user.is_superuser)
 def index(request):
     return render(request, 'adminapp/index.html')
-
-
-class ProductsListView(ListView):
-    model = Products
-    template_name = 'adminapp/admin-products-read.html'
 
 
 class UserListView(ListView):
@@ -125,3 +120,39 @@ class CategoryDeleteView(DeleteView):
     @method_decorator(user_passes_test(lambda user: user.is_superuser))
     def dispatch(self, request, *args, **kwargs):
         return super(CategoryDeleteView, self).dispatch(request, *args, **kwargs)
+
+    # =========================products================================
+
+
+class ProductsListView(ListView):
+    model = Products
+    template_name = 'adminapp/admin-products-read.html'
+
+
+class ProductsCreateView(CreateView):
+    model = Products
+    form_class = ProductAdminRegisterForm
+    template_name = 'adminapp/admin-products-create.html'
+    success_url = reverse_lazy('admin_staff:admin_products')
+
+    @method_decorator(user_passes_test(lambda user: user.is_superuser))
+    def dispatch(self, request, *args, **kwargs):
+        return super(ProductsCreateView, self).dispatch(request, *args, **kwargs)
+
+
+class ProductsUpdateView(UpdateView):
+    model = Products
+    template_name = 'adminapp/admin-products-update-delete.html'
+    success_url = reverse_lazy('admin_staff:admin_products')
+    form_class = ProductAdminUpdateForm
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductsUpdateView, self).get_context_data(**kwargs)
+        # context['title'] = 'Geekshop - Редактирование пользователя'
+        context.update({'title': 'Geekshop - Редактирование продукта'})
+
+        return context
+
+    @method_decorator(user_passes_test(lambda user: user.is_superuser))
+    def dispatch(self, request, *args, **kwargs):
+        return super(ProductsUpdateView, self).dispatch(request, *args, **kwargs)
