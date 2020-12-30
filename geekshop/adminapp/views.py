@@ -156,3 +156,19 @@ class ProductsUpdateView(UpdateView):
     @method_decorator(user_passes_test(lambda user: user.is_superuser))
     def dispatch(self, request, *args, **kwargs):
         return super(ProductsUpdateView, self).dispatch(request, *args, **kwargs)
+
+
+class ProductDeleteView(DeleteView):
+    model = Products
+    template_name = 'adminapp/admin-products-update-delete.html'
+    success_url = reverse_lazy('admin_staff:admin_products')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_active = False
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    @method_decorator(user_passes_test(lambda user: user.is_superuser))
+    def dispatch(self, request, *args, **kwargs):
+        return super(ProductDeleteView, self).dispatch(request, *args, **kwargs)

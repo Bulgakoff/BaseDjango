@@ -37,7 +37,7 @@ class CategoryAdminUpdateForm(CategoryAdminRegisterForm):
 
 # ===================Products================================================
 class ProductAdminRegisterForm(forms.ModelForm):
-    avatar = forms.ImageField(widget=forms.FileInput())
+    image = forms.ImageField(widget=forms.FileInput())
 
     class Meta:
         model = Products
