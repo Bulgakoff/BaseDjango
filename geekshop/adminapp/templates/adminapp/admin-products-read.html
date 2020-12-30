@@ -17,7 +17,7 @@
                         <th>Цена</th>
                         <th>Количество</th>
                         <th>Категория</th>
-                        <th>Активность(Удаление)</th>
+                        <th>Активность продукта (Удаление)</th>
 
                     </tr>
                     </thead>
@@ -28,7 +28,7 @@
                         <th>Цена</th>
                         <th>Количество</th>
                         <th>Категория</th>
-                        <th>Активность(Удаление)</th>
+                        <th>Активность продукта (Удаление)</th>
                     </tr>
                     </tfoot>
                     <tbody>
@@ -46,7 +46,7 @@
                             <td>{{ product.guantity }}</td>
                             <td>{{ product.category }}</td>
                             <td class="text-center">
-                                {% if product.category.is_active %}
+                                {% if product.is_active %}
                                     <i class="fas fa-check-circle"></i>
                                 {% else %}
                                     <i class="fas fa-times-circle"></i>

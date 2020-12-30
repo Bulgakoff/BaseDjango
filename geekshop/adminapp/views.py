@@ -169,6 +169,9 @@ class ProductDeleteView(DeleteView):
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
-    @method_decorator(user_passes_test(lambda user: user.is_superuser))
-    def dispatch(self, request, *args, **kwargs):
-        return super(ProductDeleteView, self).dispatch(request, *args, **kwargs)
+    # def delete(self, request, *args, **kwargs):
+    #     return super(ProductDeleteView, self).delete(request, *args, **kwargs)
+
+    # @method_decorator(user_passes_test(lambda user: user.is_superuser))
+    # def dispatch(self, request, *args, **kwargs):
+    #     return super(ProductDeleteView, self).dispatch(request, *args, **kwargs)
