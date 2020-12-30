@@ -1,6 +1,6 @@
 from authapp.forms import UserRegisterForm, UserProfileForm, UserLoginForm
 from authapp.models import User
-from mainapp.models import ProductCategory
+from mainapp.models import ProductCategory,Products
 from django import forms
 
 
@@ -33,3 +33,21 @@ class CategoryAdminRegisterForm(forms.ModelForm):
 class CategoryAdminUpdateForm(CategoryAdminRegisterForm):
     def __init__(self, *args, **kwargs):
         super(CategoryAdminUpdateForm, self).__init__(*args, **kwargs)
+
+
+# ===================Products================================================
+class ProductAdminRegisterForm(forms.ModelForm):
+    image = forms.ImageField(widget=forms.FileInput())
+
+    class Meta:
+        model = Products
+        fields = ('name', 'image', 'description', 'short_description', 'price', 'guantity', 'category')
+
+    def __init__(self, *args, **kwargs):
+        super(ProductAdminRegisterForm, self).__init__(*args, **kwargs)
+        self.fields['image'].widget.attrs['class'] = 'custom-file-input'
+
+
+class ProductAdminUpdateForm(ProductAdminRegisterForm):
+    def __init__(self, *args, **kwargs):
+        super(ProductAdminUpdateForm, self).__init__(*args, **kwargs)
