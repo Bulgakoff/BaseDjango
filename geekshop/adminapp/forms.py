@@ -1,6 +1,6 @@
 from authapp.forms import UserRegisterForm, UserProfileForm, UserLoginForm
 from authapp.models import User
-from mainapp.models import ProductCategory,Products
+from mainapp.models import ProductCategory, Products
 from django import forms
 
 
@@ -45,6 +45,8 @@ class ProductAdminRegisterForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ProductAdminRegisterForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control py-4'
         self.fields['image'].widget.attrs['class'] = 'custom-file-input'
 
 
