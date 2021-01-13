@@ -170,6 +170,7 @@ class ProductDeleteView(DeleteView):
         return HttpResponseRedirect(self.get_success_url())
 
     # def delete(self, request, *args, **kwargs):
+    #     print()
     #     return super(ProductDeleteView, self).delete(request, *args, **kwargs)
 
     # @method_decorator(user_passes_test(lambda user: user.is_superuser))
