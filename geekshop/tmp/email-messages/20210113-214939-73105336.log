@@ -1,0 +1,14 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0J/QvtC00YLQstC10YDQttC00LXQvdC40LUg0YPRh9C10YLQvdC+0Lkg0LfQsNC/?=
+ =?utf-8?b?0LjRgdC4IHR0dA==?=
+From: django@geekbrains.local
+To: ttt@gmail.com
+Date: Wed, 13 Jan 2021 18:49:39 -0000
+Message-ID: <161056377937.5568.15583115827348667306@WIN-1BLTO7MEQSE>
+
+Для подтверждения учетной записи ttt на портале     https://localhost:8000 перейдите по ссылке: 
+https://localhost:8000/auth/verify/ttt@gmail.com/ec8fcb0c2894957a309888e6fee4d31aa96043b1/
+-------------------------------------------------------------------------------

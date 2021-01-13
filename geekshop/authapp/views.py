@@ -79,14 +79,13 @@ def register(request):
             user = form.save()
             if send_verify_email(user):
                 print('сообщение подтверждения отправлено')
+                messages.success(request, 'Регистрация прошла успешно')
                 return HttpResponseRedirect(reverse('auth:login'))
             else:
                 print('ошибка отправки сообщения')
                 return HttpResponseRedirect(reverse('auth:login'))
-            messages.success(request, 'Регистрация прошла успешно')
-            return HttpResponseRedirect(reverse('auth:login'))
         else:
-            messages.error(request, 'Регистрация прошла провалилась')
+            messages.error(request, 'Регистрация провалилась')
             return HttpResponseRedirect(reverse('auth:login'))
     form = UserRegisterForm()
     contex = {
