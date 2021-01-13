@@ -1,0 +1,14 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0J/QvtC00YLQstC10YDQttC00LXQvdC40LUg0YPRh9C10YLQvdC+0Lkg0LfQsNC/?=
+ =?utf-8?b?0LjRgdC4IGFhYWE=?=
+From: django@geekbrains.local
+To: aaaa@yandex.ru
+Date: Wed, 13 Jan 2021 21:43:06 -0000
+Message-ID: <161057418689.4524.9940041645473880027@WIN-1BLTO7MEQSE>
+
+Для подтверждения учетной записи aaaa на портале     http://localhost:8000 перейдите по ссылке: 
+http://localhost:8000/auth/verify/aaaa@yandex.ru/c31ffa94d2f8a331ca4328264bd2354672fa4ee1/
+-------------------------------------------------------------------------------

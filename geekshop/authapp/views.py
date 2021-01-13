@@ -43,6 +43,7 @@ def login(request):
             username = request.POST['username']
             password = request.POST['password']
             user = auth.authenticate(username=username, password=password)
+
             if user and user.is_active:
                 auth.login(request, user)
                 return HttpResponseRedirect(reverse('main'))
@@ -66,12 +67,12 @@ def logout(request):
     return HttpResponseRedirect(reverse('main'))
 
 
-def get_basket(user):
-    if user.is_authenticated:
-        basket = Basket.objects.filter(user=user)
-        return  basket
-    else:
-        return []
+# def get_basket(user):
+#     if user.is_authenticated:
+#         basket = Basket.objects.filter(user=user)
+#         return  basket
+#     else:
+#         return []
 
 
 
@@ -90,7 +91,7 @@ def profile(request):
     # baskets = Basket.objects.filter(user=request.user)
     context = {
         'form': form,
-        'baskets': get_basket(request.user),
+        # 'baskets': get_basket(request.user),
     }
     return render(request, 'authapp/profile.html', context)
 
@@ -100,6 +101,7 @@ def register(request):
         form = UserRegisterForm(data=request.POST)
         if form.is_valid():
             user = form.save()
+
             if send_verify_email(user):
                 print('сообщение подтверждения отправлено')
                 messages.success(request, 'Регистрация прошла успешно')
