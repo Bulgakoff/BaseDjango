@@ -1,0 +1,14 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0J/QvtC00YLQstC10YDQttC00LXQvdC40LUg0YPRh9C10YLQvdC+0Lkg0LfQsNC/?=
+ =?utf-8?b?0LjRgdC4IEhsYnU=?=
+From: django@geekbrains.local
+To: hlbu@yandex.ru
+Date: Wed, 13 Jan 2021 21:12:54 -0000
+Message-ID: <161057237442.12504.2817993246496919633@WIN-1BLTO7MEQSE>
+
+Для подтверждения учетной записи Hlbu на портале     http://localhost:8000 перейдите по ссылке: 
+http://localhost:8000/auth/verify/hlbu@yandex.ru/e4b8bba14e2f8c4010b01e30290dd72ef0231d5d/
+-------------------------------------------------------------------------------

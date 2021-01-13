@@ -52,6 +52,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # 'authapp.context_processors.basket',
             ],
         },
     },
@@ -116,7 +117,7 @@ AUTH_USER_MODEL = 'authapp.User'
 
 LOGIN_URL = '/auth/login/'
 
-DOMAIN = 'https://localhost:8000'
+DOMAIN = 'http://localhost:8000'
 
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = '25'

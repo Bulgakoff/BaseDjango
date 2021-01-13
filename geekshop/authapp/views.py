@@ -5,6 +5,7 @@ from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
 from django.contrib import auth, messages
 from django.urls import reverse
 
+from authapp.models import User
 from basketapp.models import Basket
 
 
@@ -19,7 +20,20 @@ def send_verify_email(user):
 
 
 def verify(request, email, activ_key):
-    pass
+    try:
+        user = User.objects.get(email=email)
+        if user.activation_key == activ_key and not user.is_activation_key_expired():
+            user.is_active = True
+            user.activation_key = None
+            user.save()
+            auth.login(request, user)
+            return render(request, 'authapp/verification.html')
+        else:
+            print(f'error activation user: {user}')
+            return render(request, 'authapp/verification.html')
+
+    except Exception as ex:
+        return HttpResponseRedirect(reverse('main'))
 
 
 def login(request):
@@ -42,7 +56,7 @@ def login(request):
             return render(request, 'authapp/login.html', context)
 
     else:
-        form = UserLoginForm()
+        form = UserLoginForm()  
     context = {'form': form}
     return render(request, 'authapp/login.html', context)
 
@@ -50,6 +64,15 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('main'))
+
+
+def get_basket(user):
+    if user.is_authenticated:
+        basket = Basket.objects.filter(user=user)
+        return  basket
+    else:
+        return []
+
 
 
 def profile(request):
@@ -64,10 +87,10 @@ def profile(request):
     else:
         form = UserProfileForm(instance=request.user)
 
-    baskets = Basket.objects.filter(user=request.user)
+    # baskets = Basket.objects.filter(user=request.user)
     context = {
         'form': form,
-        'baskets': baskets,
+        'baskets': get_basket(request.user),
     }
     return render(request, 'authapp/profile.html', context)
 
@@ -88,8 +111,8 @@ def register(request):
             messages.error(request, 'Регистрация провалилась')
             return HttpResponseRedirect(reverse('auth:login'))
     form = UserRegisterForm()
-    contex = {
+    context = {
         'form': form,
     }
 
-    return render(request, 'authapp/register.html', contex)
+    return render(request, 'authapp/register.html', context)
