@@ -33,6 +33,7 @@ def verify(request, email, activ_key):
             return render(request, 'authapp/verification.html')
 
     except Exception as ex:
+        print(f'error activation user : {ex.args}')
         return HttpResponseRedirect(reverse('main'))
 
 
@@ -46,6 +47,7 @@ def login(request):
 
             if user and user.is_active:
                 auth.login(request, user)
+                messages.error(request, 'Ваш акаунт активен!!!')
                 return HttpResponseRedirect(reverse('main'))
             else:
                 context = {'form': form}
@@ -101,6 +103,7 @@ def register(request):
         form = UserRegisterForm(data=request.POST)
         if form.is_valid():
             user = form.save()
+
 
             if send_verify_email(user):
                 print('сообщение подтверждения отправлено')
