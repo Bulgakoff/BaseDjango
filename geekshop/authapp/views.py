@@ -10,16 +10,25 @@ from basketapp.models import Basket
 
 
 def send_verify_email(user):
+    """Отправка почтового сообщения пользователю"""
     verify_link = reverse('auth:verify', args=[user.email, user.activation_key])
+    print(f'++++++>{verify_link}')
     subject = f'Подтверждение учетной записи {user.username}'
     message = f'Для подтверждения учетной записи {user.username} на портале \
     {settings.DOMAIN} перейдите по ссылке: \n{settings.DOMAIN}{verify_link}'
+    print(message)
+    print(
+        f'----send_mail()» получим число успешно отправленных сообщений--->>{send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)}')
 
     # message = f'Для Подтверждения прейдите по ссылке {settings.DOMAIN} {verify_link}'
     return send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
 
 
 def verify(request, email, activ_key):
+    """Активация пользователя
+       Теперь необходимо реализовать механизм активации пользователя при переходе по ссылке
+       из сообщения. URL адрес уже прописан в диспетчере.
+     """
     try:
         user = User.objects.get(email=email)
         if user.activation_key == activ_key and not user.is_activation_key_expired():
@@ -59,7 +68,7 @@ def login(request):
             return render(request, 'authapp/login.html', context)
 
     else:
-        form = UserLoginForm()  
+        form = UserLoginForm()
     context = {'form': form}
     return render(request, 'authapp/login.html', context)
 
@@ -75,7 +84,6 @@ def logout(request):
 #         return  basket
 #     else:
 #         return []
-
 
 
 def profile(request):
@@ -103,8 +111,6 @@ def register(request):
         form = UserRegisterForm(data=request.POST)
         if form.is_valid():
             user = form.save()
-
-
             if send_verify_email(user):
                 print('сообщение подтверждения отправлено')
                 messages.success(request, 'Регистрация прошла успешно')
