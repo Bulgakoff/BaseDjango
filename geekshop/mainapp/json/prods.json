@@ -1,106 +1,92 @@
 [
   {
-    "model": "mainapp.products",
-    "pk": 1,
-    "fields": {
-      "name": "\u0425\u0443\u0434\u0438 \u0447\u0435\u0440\u043d\u043e\u0433\u043e \u0446\u0432\u0435\u0442\u0430 \u0441 \u043c\u043e\u043d\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u043c\u0438 adidas Originals",
-      "image": "products_images/Adidas-hoodie.png",
-      "description": "",
-      "short_description": "\u041c\u044f\u0433\u043a\u0430\u044f \u0442\u043a\u0430\u043d\u044c \u0434\u043b\u044f \u0441\u0432\u0438\u0442\u0448\u043e\u0442\u043e\u0432. \u0421\u0442\u0438\u043b\u044c \u0438 \u043a\u043e\u043c\u0444\u043e\u0440\u0442 \u2013 \u044d\u0442\u043e \u043e\u0431\u0440\u0430\u0437 \u0436\u0438\u0437\u043d\u0438.",
-      "price": "6090.00",
-      "guantity": 11,
-      "category": 1
-    }
+    "category": "дом",
+    "name": "комфорт 1",
+    "image": "products_images/product-1.jpg",
+    "short_desc": "комфортный стул",
+    "description": "подойдет для просмотра фильмов",
+    "price": "2989.5",
+    "guantity": "17"
   },
   {
-    "model": "mainapp.products",
-    "pk": 3,
-    "fields": {
-      "name": "\u0421\u0438\u043d\u044f\u044f \u043a\u0443\u0440\u0442\u043a\u0430 The North Face",
-      "image": "products_images/Blue-jacket-The-North-Face.png",
-      "description": "",
-      "short_description": "\u0413\u043b\u0430\u0434\u043a\u0430\u044f \u0442\u043a\u0430\u043d\u044c. \u0412\u043e\u0434\u043e\u043d\u0435\u043f\u0440\u043e\u043d\u0438\u0446\u0430\u0435\u043c\u043e\u0435 \u043f\u043e\u043a\u0440\u044b\u0442\u0438\u0435. \u041b\u0435\u0433\u043a\u0438\u0439 \u0438 \u0442\u0435\u043f\u043b\u044b\u0439 \u043f\u0443\u0445\u043e\u0432",
-      "price": "23725.00",
-      "guantity": 16,
-      "category": 3
-    }
+    "category": "дом",
+    "name": "комфорт 2",
+    "image": "products_images/product-2.jpg",
+    "short_desc": "очень комфортный стул",
+    "description": "подойдет для общения с друзьями",
+    "price": "3687.2",
+    "guantity": "21"
   },
   {
-    "model": "mainapp.products",
-    "pk": 4,
-    "fields": {
-      "name": "Ralf Ringer",
-      "image": "products_images/bott.jpg",
-      "description": "",
-      "short_description": "\u041c\u0430\u0442\u0435\u0440\u0438\u0430\u043b \u0432\u0435\u0440\u0445\u0430: \u043d\u0430\u0442\u0443\u0440\u0430\u043b\u044c\u043d\u0430\u044f \u043a\u043e\u0436\u0430 \u0412\u043d\u0443\u0442\u0440\u0435\u043d\u043d\u0438\u0439 \u043c\u0430\u0442\u0435\u0440\u0438\u0430\u043b: \u0448\u0435\u0440\u0441\u0442\u044f\u043d\u043e\u0439",
-      "price": "2500.00",
-      "guantity": 15,
-      "category": 2
-    }
+    "category": "дом",
+    "name": "люкс",
+    "image": "products_images/product-3.jpg",
+    "short_desc": "использованы премиальные материалы",
+    "description": "для тех, кто стремится к лучшему",
+    "price": "8157.99",
+    "guantity": "7"
   },
   {
-    "model": "mainapp.products",
-    "pk": 5,
-    "fields": {
-      "name": "\u0431\u0440\u044e\u043a\u0438 ASOS DESIGN",
-      "image": "products_images/qwe2.jpg",
-      "description": "",
-      "short_description": "\u041b\u0435\u0433\u043a\u0430\u044f \u044d\u043b\u0430\u0441\u0442\u0438\u0447\u043d\u0430\u044f \u0442\u043a\u0430\u043d\u044c \u0441\u0438\u0440\u0441\u0430\u043a\u0435\u0440 \u0424\u0430\u043a\u0442\u0443\u0440\u043d\u0430\u044f \u0442\u043a\u0430\u043d\u044c.",
-      "price": "3124.00",
-      "guantity": 8,
-      "category": 1
-    }
+    "category": "офис",
+    "name": "стандарт",
+    "image": "products_images/product-4.jpg",
+    "short_desc": "универсальное решение",
+    "description": "подойдет для любого офиса",
+    "price": "1895.25",
+    "guantity": "27"
   },
   {
-    "model": "mainapp.products",
-    "pk": 6,
-    "fields": {
-      "name": "\u041a\u043e\u0440\u0438\u0447\u043d\u0435\u0432\u044b\u0435 \u041a\u0440\u043e\u0441\u0441\u043e\u0432\u043a\u0438 \u043d\u0430 \u043f\u043b\u0430\u0442\u0444\u043e\u0440\u043c\u0435 \u0441 3 \u043f\u0430\u0440\u0430\u043c\u0438 \u043b\u044e\u0432\u0435\u0440\u0441\u043e\u0432 Dr Martens 1461 Bex",
-      "image": "products_images/tuthli.jpg",
-      "description": "",
-      "short_description": "\u0413\u043b\u0430\u0434\u043a\u0438\u0439 \u043a\u043e\u0436\u0430\u043d\u044b\u0439 \u0432\u0435\u0440\u0445. \u041d\u0430\u0442\u0443\u0440\u0430\u043b\u044c\u043d\u044b\u0439 \u043c\u0430\u0442\u0435\u0440\u0438\u0430\u043b.",
-      "price": "2560.00",
-      "guantity": 14,
-      "category": 5
-    }
+    "category": "офис",
+    "name": "премиум",
+    "image": "products_images/product-5.jpg",
+    "short_desc": "улучшенный дизайн",
+    "description": "идеально впишется в строгий интерьер офиса",
+    "price": "3587.41",
+    "guantity": "9"
   },
   {
-    "model": "mainapp.products",
-    "pk": 8,
-    "fields": {
-      "name": "\u0440\u044e\u043a\u0437\u0430\u043a \u043f\u0435\u0441\u0442\u0440\u044b\u0439",
-      "image": "products_images/rukzak.jpg",
-      "description": "",
-      "short_description": "\u041c\u044f\u0433\u043a\u0430\u044f \u0442\u043a\u0430\u043d\u044c",
-      "price": "4520.00",
-      "guantity": 2,
-      "category": 4
-    }
+    "category": "модерн",
+    "name": "новинка",
+    "image": "products_images/product-6.jpg",
+    "short_desc": "инновационный дизайн",
+    "description": "нестандартное решение для современного интерьера",
+    "price": "5361.47",
+    "guantity": "18"
   },
   {
-    "model": "mainapp.products",
-    "pk": 9,
-    "fields": {
-      "name": "\u041a\u043e\u0440\u0438\u0447\u043d\u0435\u0432\u044b\u0439 \u0441\u043f\u043e\u0440\u0442\u0438\u0432\u043d\u044b\u0439 oversized-\u0442\u043e\u043f ASOS DESIGN",
-      "image": "products_images/Brown-sports-oversized-top-ASOS-DESIGN.png",
-      "description": "",
-      "short_description": "\u041c\u0430\u0442\u0435\u0440\u0438\u0430\u043b \u0441 \u043f\u043b\u044e\u0448\u0435\u0432\u043e\u0439 \u0442\u0435\u043a\u0441\u0442\u0443\u0440\u043e\u0439. \u0423\u0434\u043e\u0431\u043d\u044b\u0439 \u0438 \u043c\u044f\u0433\u043a\u0438\u0439.",
-      "price": "4588.00",
-      "guantity": 5,
-      "category": 3
-    }
+    "category": "модерн",
+    "name": "прогресс",
+    "image": "products_images/product-7.jpg",
+    "short_desc": "прогрессивный дизайн",
+    "description": "функциональное и комфортное решение",
+    "price": "6789.33",
+    "guantity": "12"
   },
   {
-    "model": "mainapp.products",
-    "pk": 10,
-    "fields": {
-      "name": "\u0420\u044e\u043a\u0437\u0430\u043a WENGER NARROW HIKING PACK 13022215 \u0447\u0435\u0440\u043d\u044b\u0439",
-      "image": "products_images/rukzak2.jpg",
-      "description": "",
-      "short_description": "\u041a\u043e\u0436\u0430",
-      "price": "4440.00",
-      "guantity": 2,
-      "category": 4
-    }
+    "category": "классика",
+    "name": "венеция",
+    "image": "products_images/product-8.jpg",
+    "short_desc": "классические формы",
+    "description": "окунитесь в европейский комфорт",
+    "price": "4147.51",
+    "guantity": "25"
+  },
+  {
+    "category": "классика",
+    "name": "тоскана",
+    "image": "products_images/product-9.jpg",
+    "short_desc": "эргономичная спинка",
+    "description": "почувствуйте комфорт и насладитесь цветовой гаммой",
+    "price": "7147.35",
+    "guantity": "18"
+  },
+  {
+    "category": "классика",
+    "name": "рим",
+    "image": "products_images/product-10.jpg",
+    "short_desc": "удачные пропорции",
+    "description": "компактность и функциональность",
+    "price": "8357.77",
+    "guantity": "8"
   }
 ]
