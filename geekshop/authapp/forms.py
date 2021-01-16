@@ -24,7 +24,7 @@ class UserLoginForm(AuthenticationForm):
 class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2', )
+        fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2','age', )
 
     def __init__(self, *args, **kwargs):
         super(UserRegisterForm, self).__init__(*args, **kwargs)
@@ -37,7 +37,7 @@ class UserRegisterForm(UserCreationForm):
         self.fields['email'].widget.attrs['placeholder'] = 'Введите email'
         self.fields['first_name'].widget.attrs['placeholder'] = 'Введите имя'
         self.fields['last_name'].widget.attrs['placeholder'] = 'Введите Фамилию'
-        # self.fields['age'].widget.attrs['placeholder'] = 'Введите возраст'
+        self.fields['age'].widget.attrs['placeholder'] = 'Введите возраст'
         # self.fields['avatar'].widget.attrs['placeholder'] = 'Введите avatar'
 
     # def clean_age(self):

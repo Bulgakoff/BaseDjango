@@ -7,11 +7,10 @@ from django.utils.timezone import now
 
 class User(AbstractUser):
     avatar = models.ImageField(upload_to='users_avatars', blank=True)
-    age = models.PositiveSmallIntegerField(blank=True, null=True)
+    age = models.PositiveSmallIntegerField(verbose_name='Возраст', default=18, null=True)
 
-    activation_key = models.CharField(max_length=128, blank=True, null=True)
-    activation_key_expires = models.DateTimeField(default=(now() + timedelta(hours=48)))
-
+    activation_key = models.CharField(verbose_name='Ключ подтверждения',max_length=128, blank=True, null=True)
+    activation_key_expires = models.DateTimeField(verbose_name='Актуальность ключа',default=(now() + timedelta(hours=48)))
 
     class Meta:
         verbose_name = 'Пользователь'
