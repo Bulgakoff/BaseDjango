@@ -1,0 +1,14 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0J/QvtC00YLQstC10YDQttC00LXQvdC40LUg0YPRh9C10YLQvdC+0Lkg0LfQsNC/?=
+ =?utf-8?b?0LjRgdC4IGRqYW5nb3FxcQ==?=
+From: django@geekbrains.local
+To: qqq@yandex.ru
+Date: Fri, 15 Jan 2021 20:03:39 -0000
+Message-ID: <161074101936.10220.2257086512571083809@WIN-1BLTO7MEQSE>
+
+Для подтверждения учетной записи djangoqqq на портале     http://localhost:8000 перейдите по ссылке: 
+http://localhost:8000/auth/verify/qqq@yandex.ru/46a5f086cedc2faa65b2fb85b5af1361e3f0ffa7/
+-------------------------------------------------------------------------------

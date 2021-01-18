@@ -1,9 +1,49 @@
+from django.conf import settings
+from django.core.mail import send_mail
 from django.shortcuts import render, HttpResponseRedirect
 from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
 from django.contrib import auth, messages
 from django.urls import reverse
 
+from authapp.models import User
 from basketapp.models import Basket
+
+
+def send_verify_email(user):
+    """Отправка почтового сообщения пользователю"""
+    verify_link = reverse('auth:verify', args=[user.email, user.activation_key])
+    print(f'++++++>{verify_link}')
+    subject = f'Подтверждение учетной записи {user.username}'
+    message = f'Для подтверждения учетной записи {user.username} на портале \
+    {settings.DOMAIN} перейдите по ссылке: \n{settings.DOMAIN}{verify_link}'
+    print(message)
+    print(
+        f'----send_mail()» получим число успешно отправленных сообщений--->>{send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)}')
+
+    # message = f'Для Подтверждения прейдите по ссылке {settings.DOMAIN} {verify_link}'
+    return send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
+
+
+def verify(request, email, activ_key):
+    """Активация пользователя
+       Теперь необходимо реализовать механизм активации пользователя при переходе по ссылке
+       из сообщения. URL адрес уже прописан в диспетчере.
+     """
+    try:
+        user = User.objects.get(email=email)
+        if user.activation_key == activ_key and not user.is_activation_key_expired():
+            user.is_active = True
+            user.activation_key = None
+            user.save()
+            auth.login(request, user)
+            return render(request, 'authapp/verification.html')
+        else:
+            print(f'error activation user: {user}')
+            return render(request, 'authapp/verification.html')
+
+    except Exception as ex:
+        print(f'error activation user : {ex.args}')
+        return HttpResponseRedirect(reverse('main'))
 
 
 def login(request):
@@ -13,8 +53,10 @@ def login(request):
             username = request.POST['username']
             password = request.POST['password']
             user = auth.authenticate(username=username, password=password)
+
             if user and user.is_active:
                 auth.login(request, user)
+                messages.error(request, 'Ваш акаунт активен!!!')
                 return HttpResponseRedirect(reverse('main'))
             else:
                 context = {'form': form}
@@ -36,6 +78,14 @@ def logout(request):
     return HttpResponseRedirect(reverse('main'))
 
 
+# def get_basket(user):
+#     if user.is_authenticated:
+#         basket = Basket.objects.filter(user=user)
+#         return  basket
+#     else:
+#         return []
+
+
 def profile(request):
     if request.method == 'POST':
         form = UserProfileForm(data=request.POST, files=request.FILES, instance=request.user)
@@ -48,10 +98,10 @@ def profile(request):
     else:
         form = UserProfileForm(instance=request.user)
 
-    baskets = Basket.objects.filter(user=request.user)
+    # baskets = Basket.objects.filter(user=request.user)
     context = {
         'form': form,
-        'baskets': baskets,
+        # 'baskets': get_basket(request.user),
     }
     return render(request, 'authapp/profile.html', context)
 
@@ -60,15 +110,20 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(data=request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Регистрация прошла успешно')
-            return HttpResponseRedirect(reverse('auth:login'))
+            user = form.save()
+            if send_verify_email(user):
+                print('сообщение подтверждения отправлено')
+                messages.success(request, 'Регистрация прошла успешно')
+                return HttpResponseRedirect(reverse('auth:login'))
+            else:
+                print('ошибка отправки сообщения')
+                return HttpResponseRedirect(reverse('auth:login'))
         else:
-            messages.error(request, 'Регистрация прошла провалилась')
+            messages.error(request, 'Регистрация провалилась')
             return HttpResponseRedirect(reverse('auth:login'))
     form = UserRegisterForm()
-    contex = {
+    context = {
         'form': form,
     }
 
-    return render(request, 'authapp/register.html', contex)
+    return render(request, 'authapp/register.html', context)

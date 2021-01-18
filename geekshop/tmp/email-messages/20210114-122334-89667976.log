@@ -1,0 +1,14 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0J/QvtC00YLQstC10YDQttC00LXQvdC40LUg0YPRh9C10YLQvdC+0Lkg0LfQsNC/?=
+ =?utf-8?b?0LjRgdC4IG5pY2sy?=
+From: django@geekbrains.local
+To: nick2@yandex.ru
+Date: Thu, 14 Jan 2021 09:23:34 -0000
+Message-ID: <161061621499.9072.5857962463858090796@WIN-1BLTO7MEQSE>
+
+Для подтверждения учетной записи nick2 на портале     http://localhost:8000 перейдите по ссылке: 
+http://localhost:8000/auth/verify/nick2@yandex.ru/44aecfa772a13ccf7ffd388f294b2c54a5543f2f/
+-------------------------------------------------------------------------------
