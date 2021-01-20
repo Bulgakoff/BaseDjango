@@ -36,15 +36,16 @@ class OrderCreateLists(CreateView):
             print(f'========>>>>{formset}')
         else:
             formset = OrderFormSet()
-            # basket_items = Basket.objects.filter(user=self.request.user)
-            # if basket_items.exists():
-            #     OrderFormSet = inlineformset_factory(Order, OrderItems, form=OrderItemForm, extra=basket_items.count())
-            #     formset = OrderFormSet()  # пустой запрос передаем
-            #     for num,form in enumerate(formset.forms):
-            #         form.initial['product']=basket_items[num].product
-            #         form.initial['quantity']=basket_items[num].quantity
-            # else:
-            #     formset = OrderFormSet()  # пустой запрос передаем
+            basket_items = Basket.objects.filter(user=self.request.user)
+            if basket_items.exists():
+                OrderFormSet = inlineformset_factory(Order, OrderItems, form=OrderItemForm, extra=basket_items.count())
+                formset = OrderFormSet()  # пустой запрос передаем
+                for num, form in enumerate(formset.forms):
+                    form.initial['product'] = basket_items[num].product
+                    form.initial['quantity'] = basket_items[num].quantity
+                # basket_items.delete()
+            else:
+                formset = OrderFormSet()  # пустой запрос передаем
         data['orderitems'] = formset
         print(f'======++++++====>>>>{data}')
 
@@ -55,16 +56,14 @@ class OrderCreateLists(CreateView):
         orderitems = context['orderitems']
 
         with transaction.atomic():
-            form.instance.user=self.request.user
+            form.instance.user = self.request.user
             self.object = form.save()
             if orderitems.is_valid():
                 orderitems.instance = self.object
                 orderitems.save()
 
-              # удаляем пустой заказ
+            # удаляем пустой заказ
         if self.object.get_total_summ() == 0:
-             self.object.delete()
+            self.object.delete()
         # return super(OrderItemsCreate, self).form_valid(form)
         return super(OrderCreateLists, self).form_valid(form)
-
-
