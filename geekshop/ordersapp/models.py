@@ -41,6 +41,9 @@ class Order(models.Model):
         verbose_name_plural = 'Заказы'
         ordering = ('-created_at',)
 
+    def __str__(self):
+        return 'Текущий заказ: {}'.format(self.id)
+
     def get_total_quantity(self):
         # baskets = Basket.objects.filter(user=self.user)
         baskets = self.orderitems.select_related()
@@ -48,13 +51,16 @@ class Order(models.Model):
 
     def get_total_summ(self):
         # baskets = Basket.objects.filter(user=self.user)
+        print(f'++++baskets[]+++>>>>{self.orderitems.select_related()}')
         baskets = self.orderitems.select_related()
         return sum(list(map(lambda x: x.quantity * x.product.price, baskets)))
         # return sum(basket.get_ordered_products_cost() for basket in baskets)
 
+    # переопределяем метод, удаляющий объект
     def delete(self):
         for item in self.orderitems.select_related():
-            item.product.quantity += item.quantity
+            print(f'--item====item>>>>{self.orderitems.select_related()}')
+            item.product.guantity += item.quantity
             item.product.save()
 
 
