@@ -45,4 +45,4 @@ class Command(BaseCommand):
         # if not User.objects.filter(username='django').exists():
         #     User.objects.create_superuser('django', 'django@geekshop.local', 'geekbrains')
         if not User.objects.filter(username='django').exists():
-            User.objects.create_superuser('django', 'django@geekshop.local', 'geekbrains',age=25)
+            User.objects.create_superuser('django', 'django@geekshop.local', 'geekbrains', age=25)
