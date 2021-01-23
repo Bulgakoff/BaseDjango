@@ -8,6 +8,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
 from basketapp.models import Basket
+from mainapp.models import Products
 from ordersapp.forms import OrderItemForm
 from ordersapp.models import Order, OrderItems
 
@@ -16,6 +17,7 @@ class OrderLists(ListView):
     model = Order
 
     def get_queryset(self):
+        """Отдаст все 'чеки' определенного пользователя"""
         return Order.objects.filter(user=self.request.user)
 
 
@@ -46,7 +48,6 @@ class OrderCreateLists(CreateView):
                 basket_items.delete()
             else:
                 formset = OrderFormSet()  # пустой запрос передаем
-        # print(f'===data["orderitems"]==до=>>>>{data["orderitems"]}')
         data['orderitems'] = formset
         print(f'====data+++====>>>>{data}')
         print(f'====data+++"orderitems"==после==>>>>{data["orderitems"]}')
@@ -99,6 +100,7 @@ class OrderUpdateLists(UpdateView):
     def form_valid(self, form):
         context = self.get_context_data()
         orderitems = context['orderitems']
+        print(f'===orderitems+++====>>>>{orderitems}')
 
         with transaction.atomic():
             if orderitems.is_valid():
@@ -110,6 +112,23 @@ class OrderUpdateLists(UpdateView):
             self.object.delete()
         # return super(OrderItemsCreate, self).form_valid(form)
         return super(OrderUpdateLists, self).form_valid(form)
+
+    # def basket_add(self, request, pk=None):
+    #     product = get_object_or_404(Products, id=pk)
+    #     baskets = Basket.objects.filter(user=request.user, product=product)
+    #     if not baskets.exists():
+    #         basket = Basket(user=request.user, product=product)
+    #         basket.quantity += 1
+    #         basket.save()
+    #         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    #     else:
+    #         basket = baskets.first()
+    #         basket.quantity += 1
+    #         basket.save()
+    #         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    #
+    #
+    #
 
     # ================OrderDeleteLists=======================
 
@@ -128,8 +147,8 @@ class OrderReadLists(DetailView):
 
 
 def order_forming_complete(request, pk):
-    order = get_object_or_404(Order,pk=pk)
-    order.status=Order.SEND_TO_PROCEED
+    order = get_object_or_404(Order, pk=pk)
+    order.status = Order.SEND_TO_PROCEED
     order.save()
 
     return HttpResponseRedirect(reverse('orders_users:orders'))
