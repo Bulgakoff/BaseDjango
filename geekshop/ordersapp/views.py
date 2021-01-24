@@ -1,4 +1,6 @@
 from django.db import transaction
+from django.db.models.signals import pre_save, pre_delete
+from django.dispatch import receiver
 from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -33,21 +35,22 @@ class OrderCreateLists(CreateView):
         """Предобработка"""
         data = super(OrderCreateLists, self).get_context_data(**kwargs)
         OrderFormSet = inlineformset_factory(Order, OrderItems, form=OrderItemForm, extra=1)
-
         if self.request.POST:
-            formset = OrderFormSet(self.request.POST)  # весьPOST запрос передаем
+            formset = OrderFormSet(self.request.POST,instance=self.object)  # весьPOST запрос передаем
             print(f'===formset===>>>>{formset}')
         else:
             basket_items = Basket.objects.filter(user=self.request.user)
+
             if basket_items.exists():
                 OrderFormSet = inlineformset_factory(Order, OrderItems, form=OrderItemForm, extra=basket_items.count())
-                formset = OrderFormSet()  # пустой запрос передаем
+                formset = OrderFormSet(instance=self.object)  # пустой запрос передаем
                 for num, form in enumerate(formset.forms):
                     form.initial['product'] = basket_items[num].product
                     form.initial['quantity'] = basket_items[num].quantity
-                basket_items.delete()
+                    form.initial['price'] = basket_items[num].product.price
+                # basket_items.delete()
             else:
-                formset = OrderFormSet()  # пустой запрос передаем
+                formset = OrderFormSet(instance=self.object)  # пустой запрос передаем
         data['orderitems'] = formset
         print(f'====data+++====>>>>{data}')
         print(f'====data+++"orderitems"==после==>>>>{data["orderitems"]}')
@@ -57,8 +60,10 @@ class OrderCreateLists(CreateView):
     def form_valid(self, form):
         context = self.get_context_data()
         orderitems = context['orderitems']
+        print(f'====+++orderitems+++====>>>>{orderitems}')
 
         with transaction.atomic():
+            Basket.objects.filter(user=self.request.user).delete()
             form.instance.user = self.request.user
             self.object = form.save()
             if orderitems.is_valid():
@@ -86,14 +91,19 @@ class OrderUpdateLists(UpdateView):
 
         if self.request.POST:
             formset = OrderFormSet(self.request.POST, instance=self.object)
+
             print(f'===formset===>>>>{formset}')
             print(f'===self.object===>>>>{self.object}')
             print(f'===self.request.user.id===>>>>{self.request.user.id}')
         else:
             formset = OrderFormSet(instance=self.object)  # пустой запрос передаем
+            for form in formset.forms:
+                if form.instance.pk:
+                    form.initial['price'] = form.instance.product.price
+            data.update({'orderitems': formset})
         # data['orderitems'] = formset
-        data.update({'orderitems': formset})
-        print(f'====data+++====>>>>{data}')
+        # data.update({'orderitems': formset})
+            print(f'====data+++====>>>>{data}')
 
         return data
 
@@ -152,3 +162,22 @@ def order_forming_complete(request, pk):
     order.save()
 
     return HttpResponseRedirect(reverse('orders_users:orders'))
+
+
+@receiver(pre_save, sender=Basket)
+@receiver(pre_save, sender=OrderItems)
+def product_quantity_update_save(sender, update_fields, instance, **kwargs):
+    if update_fields is 'quantity' or 'product':
+        if instance.pk:
+            # instance.product.guantity -= instance.quantity - sender.objects.filter(instance.pk).first().quantity
+            instance.product.guantity -= instance.quantity - sender.get_item(instance.pk).quantity
+        else:
+            instance.product.guantity -= instance.quantity
+        instance.product.save()
+
+
+@receiver(pre_delete, sender=Basket)
+@receiver(pre_delete, sender=OrderItems)
+def product_quantity_update_delete(sender, instance, **kwargs):
+    instance.product.guantity += instance.quantity
+    instance.product.save()

@@ -24,7 +24,8 @@ def basket_add(request, id_product=None):
 
 @login_required
 def basket_remove(request, id=None):
-    basket = Basket.objects.get(id=id)
+    # basket = Basket.objects.get(id=id)
+    basket = get_object_or_404(Basket, id=id)
     basket.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 

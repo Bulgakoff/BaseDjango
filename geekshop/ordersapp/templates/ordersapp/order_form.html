@@ -3,8 +3,8 @@
 
 {% block content %}
     {% include 'ordersapp/includes/inc_order_summary.html' %}
-    <div class="order_form">
-        <form action="" method="post">
+    <div class="order_form" style="margin: 100px">
+    <form action="" method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <table class="table">
@@ -14,7 +14,7 @@
                         <thead>
                         <tr>
                             {% for field in form.visible_fields %}
-                                <th class="{% cycle 'td1' 'td2' 'td3' %} order formset_td">
+                                <th class="{% cycle 'td1' 'td2' 'td3' 'td4' %} order formset_td">
                                     {{ field.label|capfirst }}
                                 </th>
                             {% endfor %}
@@ -23,14 +23,20 @@
                     {% endif %}
                     <tr class="formset_row">
                         {% for field in form.visible_fields %}
-                            <td class="{% cycle 'td1' 'td2' 'td3' %} order formset_td">
+                            <td class="{% cycle 'td1' 'td2' 'td3' 'td4' %} order formset_td">
                                 {% if forloop.first %}
                                     {% for hidden in form.hidden_fields %}
                                         {{ hidden }}
                                     {% endfor %}
                                 {% endif %}
                                 {{ field.errors.as_ul }}
-                                {{ field }}
+                                {% if field.name == 'price' %}
+                                    {% if field.value %}
+                                        <span class="orderitems-{{ forloop.parentloop.counter0 }}-price">{{ field.value }} руб.</span>
+                                    {% endif %}
+                                {% else %}
+                                    {{ field }}
+                                {% endif %}
                             </td>
                         {% endfor %}
                     </tr>
@@ -43,11 +49,11 @@
 
             {% include 'ordersapp/includes/inc_order_actions.html' %}
         </form>
-{#        <button class="btn btn-default btn-round form-control last" >#}
-{#            <a href="{% url 'main' %}">#}
-{#                <button>на главную</button>#}
-{#            </a>#}
-{#        </button>#}
+    {#        <button class="btn btn-default btn-round form-control last" >#}
+    {#            <a href="{% url 'main' %}">#}
+    {#                <button>на главную</button>#}
+    {#            </a>#}
+    {#        </button>#}
     </div>
 
 {% endblock %}
