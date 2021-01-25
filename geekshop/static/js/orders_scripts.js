@@ -37,6 +37,7 @@ window.onload = function () {
     $('.order_form').on('click', 'input[type=checkbox]', function () {
         // var target = $(this)
         var target = event.target;
+        // TODO: to do smth
         orderitem_num = parseInt(target.name.replace('orderitems-', '').replace('-quantity', ''));
         if (target.checked) {
             delta_quantity = -quantity_arr[orderitem_num];
