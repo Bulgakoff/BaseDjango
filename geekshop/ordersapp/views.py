@@ -164,20 +164,20 @@ def order_forming_complete(request, pk):
     return HttpResponseRedirect(reverse('orders_users:orders'))
 
 
-@receiver(pre_save, sender=Basket)
-@receiver(pre_save, sender=OrderItems)
-def product_quantity_update_save(sender, update_fields, instance, **kwargs):
-    if update_fields is 'quantity' or 'product':
-        if instance.pk:
-            # instance.product.guantity -= instance.quantity - sender.objects.filter(instance.pk).first().quantity
-            instance.product.guantity -= instance.quantity - sender.get_item(instance.pk).quantity
-        else:
-            instance.product.guantity -= instance.quantity
-        instance.product.save()
+# @receiver(pre_save, sender=Basket)
+# @receiver(pre_save, sender=OrderItems)
+# def product_quantity_update_save(sender, update_fields, instance, **kwargs):
+#     if update_fields is 'quantity' or 'product':
+#         if instance.pk:
+#             # instance.product.guantity -= instance.quantity - sender.objects.filter(instance.pk).first().quantity
+#             instance.product.guantity -= instance.quantity - sender.get_item(instance.pk).quantity
+#         else:
+#             instance.product.guantity -= instance.quantity
+#         instance.product.save()
 
 
-@receiver(pre_delete, sender=Basket)
-@receiver(pre_delete, sender=OrderItems)
-def product_quantity_update_delete(sender, instance, **kwargs):
-    instance.product.guantity += instance.quantity
-    instance.product.save()
+# @receiver(pre_delete, sender=Basket)
+# @receiver(pre_delete, sender=OrderItems)
+# def product_quantity_update_delete(sender, instance, **kwargs):
+#     instance.product.guantity += instance.quantity
+#     instance.product.save()
