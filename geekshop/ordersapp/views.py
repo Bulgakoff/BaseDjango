@@ -2,7 +2,7 @@ from django.db import transaction
 from django.db.models.signals import pre_save, pre_delete
 from django.dispatch import receiver
 from django.forms import inlineformset_factory
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 
 # покажем пользователю его заказы
@@ -181,3 +181,13 @@ def order_forming_complete(request, pk):
 # def product_quantity_update_delete(sender, instance, **kwargs):
 #     instance.product.guantity += instance.quantity
 #     instance.product.save()
+
+def get_product_price(request,pk):
+    if request.is_ajax():
+        # product_item = Products.objects.get(pk=int(pk))
+        product_item = Products.objects.filter(pk=int(pk)).first()
+        if product_item:
+            return JsonResponse({'price':product_item.price})
+        return JsonResponse({'price': 0})
+
+
