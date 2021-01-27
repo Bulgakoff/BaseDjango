@@ -67,7 +67,8 @@ window.onload = function () {
         var target_name = row[0].querySelector('input[type=number]').name;
         orderitem_num = parseInt(target_name.replace('orderitems-', '').replace('-DELETE', ''));
         delta_quantity = -quantity_arr[orderitem_num];
-        orderSummeryUpdate(price_arr[orderitem_num], delta_quantity)
+        orderSummeryUpdate(price_arr[orderitem_num], delta_quantity);
+
 
     }
 }
