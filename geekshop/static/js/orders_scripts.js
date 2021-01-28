@@ -19,6 +19,20 @@ window.onload = function () {
             price_arr[i] = 0
         }
     }
+
+    function orderSummaryRecalc() {
+        order_total_price = 0;
+        order_total_quantity = 0
+        for (var i = 0; i < TOTAL_FORMS; i++) {
+            order_total_quantity += quantity_arr[i];
+            order_total_price += price_arr[i] * quantity_arr[i];
+        }
+        $('.order_total_quantity').html(order_total_quantity.toString());
+        $('.order_total_cost').html(Number(order_total_price.toFixed(2).toString()));
+
+
+    }
+
     // console.log(quantity_arr)
     // console.log(price_arr)
     // ------------------------number-----------------
@@ -65,7 +79,7 @@ window.onload = function () {
                         var price_html = '<span>' + data.price.toString().replace('.', ',') + '</span> руб.';
                         var current_tr = $('.order_form table').find('tr:eq(' + (orderitem_num + 1) + ')');
                         current_tr.find('td:eq(2)').html(price_html);
-
+                        orderSummaryRecalc();
                     }
                 }
             })

@@ -9,8 +9,6 @@ window.onload = function () {
             },
         })
         console.log(elem.name, elem.value)
-
-
     });
     event.preventDefault();
 }
