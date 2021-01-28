@@ -38,13 +38,42 @@
                     <a class="nav-link" href="#"><i class="fas fa-shopping-bag"></i></a>
                 </li>
                 {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'auth:profile' %}">{{ user.first_name }} <i
-                                class="fas fa-user-circle"></i></a>
+                    <li>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" href="{% url 'auth:profile' %}" data-toggle="dropdown">
+                                {{ user.first_name|default:'Пользователь' }}
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{% url 'auth:profile' %}">
+                                        профиль
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'ordersapp:orders' %}">
+                                        заказы
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link"#}
+{#                           href="{% url 'auth:profile' %}">профиль#}
+{#                            {{ user.first_name|default:'Пользователь' }}#}
+{#                            <i class="fas fa-user-circle"></i>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li class="nav-item">#}
+                        {#                        <a class="nav-link" href="#">#}
+{#                        <a class="nav-link" href="{% url 'orders_users:orders' %}">#}
+{#                            ЗАказы#}
+{#                        </a>#}
+{#                    </li>#}
                     {% if user.is_superuser or user.is_staff %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'admin_staff:index' %}">
+                            <a class="nav-link" href="{% url 'admin_staff:index' %}">Админка
                                 <i class="fas fa-user-shield"></i>
                             </a>
 
