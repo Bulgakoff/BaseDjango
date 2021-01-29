@@ -2,7 +2,7 @@ from django.db import transaction
 from django.db.models.signals import pre_save, pre_delete
 from django.dispatch import receiver
 from django.forms import inlineformset_factory
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 
 # покажем пользователю его заказы
@@ -36,7 +36,7 @@ class OrderCreateLists(CreateView):
         data = super(OrderCreateLists, self).get_context_data(**kwargs)
         OrderFormSet = inlineformset_factory(Order, OrderItems, form=OrderItemForm, extra=1)
         if self.request.POST:
-            formset = OrderFormSet(self.request.POST,instance=self.object)  # весьPOST запрос передаем
+            formset = OrderFormSet(self.request.POST, instance=self.object)  # весьPOST запрос передаем
             print(f'===formset===>>>>{formset}')
         else:
             basket_items = Basket.objects.filter(user=self.request.user)
@@ -101,8 +101,8 @@ class OrderUpdateLists(UpdateView):
                 if form.instance.pk:
                     form.initial['price'] = form.instance.product.price
             data.update({'orderitems': formset})
-        # data['orderitems'] = formset
-        # data.update({'orderitems': formset})
+            # data['orderitems'] = formset
+            # data.update({'orderitems': formset})
             print(f'====data+++====>>>>{data}')
 
         return data
@@ -181,3 +181,11 @@ def order_forming_complete(request, pk):
 # def product_quantity_update_delete(sender, instance, **kwargs):
 #     instance.product.guantity += instance.quantity
 #     instance.product.save()
+def get_product_price(request, pk):
+    if request.is_ajax():
+        product_item = Products.objects.filter(pk=int(pk)).first()
+        if product_item:
+            return JsonResponse({'price': product_item.price})
+        return JsonResponse({'price': 0})
+
+
