@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'template_profiler_panel',
 
+    'django_extensions'
+
 ]
 
 MIDDLEWARE = [
@@ -113,7 +115,7 @@ WSGI_APPLICATION = 'geekshop.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-#база для postgresql
+# база для postgresql
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
