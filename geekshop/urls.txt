@@ -1,8 +1,1 @@
-http://194.58.118.244/
-http://194.58.118.244/products/
-http://194.58.118.244/contact/
-http://194.58.118.244/products/category/1/
-http://194.58.118.244/products/category/2/
-http://194.58.118.244/products/category/3/
-http://194.58.118.244/products/category/4/
-http://194.58.118.244/basket/
+http://194.58.118.244/auth/profile/
