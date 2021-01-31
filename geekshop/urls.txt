@@ -1,1 +1,1 @@
-http://194.58.118.244/auth/profile/
+http://194.58.118.244/products/
