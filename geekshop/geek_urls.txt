@@ -1,6 +1,6 @@
 http://194.58.118.244/
+http://194.58.118.244/auth/login/ POST username=django&password=geekshop
 http://194.58.118.244/products/
-http://194.58.118.244/contact/
 http://194.58.118.244/products/category/1/
 http://194.58.118.244/products/category/2/
 http://194.58.118.244/products/category/3/
