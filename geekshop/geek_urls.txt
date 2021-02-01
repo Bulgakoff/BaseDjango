@@ -7,5 +7,3 @@ http://194.58.118.244/products/category/3/
 http://194.58.118.244/products/category/4/
 http://194.58.118.244/basket/
 http://194.58.118.244/order/
-http://194.58.118.244/auth/edit/
-http://194.58.118.244/order/update/6/
