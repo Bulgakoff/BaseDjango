@@ -1,2 +1,2 @@
 http://194.58.118.244/auth/login/ POST username=django&password=geekshop
-http://194.58.118.244/auth/profile/
+http://194.58.118.244/order/craete/
