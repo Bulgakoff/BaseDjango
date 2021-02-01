@@ -1,2 +1,2 @@
-http://194.58.118.244/products/1/
-
+http://194.58.118.244/auth/login/ POST username=django&password=geekshop
+http://194.58.118.244/auth/profile/
