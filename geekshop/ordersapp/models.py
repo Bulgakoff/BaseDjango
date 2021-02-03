@@ -56,6 +56,13 @@ class Order(models.Model):
         return sum(list(map(lambda x: x.quantity * x.product.price, baskets)))
         # return sum(basket.get_ordered_products_cost() for basket in baskets)
 
+    def get_summary(self):
+        items = self.orderitems.select_related()
+        return {
+            'total_cost': sum(list(map(lambda x: x.quantity * x.product.price, items))),
+            'total_quantity': sum(list(map(lambda x: x.quantity, items))),
+        }
+
     # переопределяем метод, удаляющий объект
     def delete(self):
         for item in self.orderitems.select_related():
@@ -63,8 +70,7 @@ class Order(models.Model):
             item.product.guantity += item.quantity
             item.product.save()
 
-
-        self.is_active=False
+        self.is_active = False
         self.save()
 
 
@@ -79,5 +85,3 @@ class OrderItems(models.Model):
     @staticmethod
     def get_item(pk):
         return OrderItems.objects.filter(pk=pk).first()
-
-
