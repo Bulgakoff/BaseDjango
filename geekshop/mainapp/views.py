@@ -2,6 +2,8 @@ from django.conf import settings
 from django.core.cache import cache
 from django.shortcuts import render
 from django.shortcuts import HttpResponseRedirect, get_object_or_404
+from django.views.decorators.cache import cache_page
+
 from mainapp.models import ProductCategory, Products
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -38,7 +40,7 @@ def index(request):
     }
     return render(request, 'mainapp/index.html', context)
 
-
+@cache_page(3600)
 def products(request, category_id=None, page=1):
     """Without pagination."""
     context = {'title': 'продукты -  КАТЕГОРИИ',
