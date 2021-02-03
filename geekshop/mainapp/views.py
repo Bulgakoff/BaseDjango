@@ -18,6 +18,18 @@ def get_links_menu():
     else:
         return ProductCategory.objects.filter(is_active=True)
 
+def get_category(pk):
+    if settings.LOW_CACHE:
+        key = f'category_{pk}'
+        category = cache.get(key)
+        if category is None:
+            category= ProductCategory.objects.get(pk=pk)
+            cache.set(key,category)
+        return category
+
+    else:
+        return ProductCategory.objects.get(pk=pk)
+
 
 
 def index(request):
