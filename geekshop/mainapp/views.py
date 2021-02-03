@@ -1,7 +1,23 @@
+from django.conf import settings
+from django.core.cache import cache
 from django.shortcuts import render
 from django.shortcuts import HttpResponseRedirect, get_object_or_404
 from mainapp.models import ProductCategory, Products
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+def get_links_menu():
+    if settings.LOW_CACHE:
+        key = 'links_menu'
+        links_menu=cache.get(key)
+        if links_menu is None:
+            links_menu = ProductCategory.objects.filter(is_active=True)
+            cache.set(key, links_menu)
+        return links_menu
+
+
+    else:
+        return ProductCategory.objects.filter(is_active=True)
+
 
 
 def index(request):
