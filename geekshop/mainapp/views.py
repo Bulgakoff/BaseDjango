@@ -30,7 +30,9 @@ def index(request):
 def products(request, category_id=None, page=1):
     """Without pagination."""
     context = {'title': 'продукты -  КАТЕГОРИИ',
-               'links_menu': ProductCategory.objects.all(), }
+               # 'links_menu': ProductCategory.objects.all(),
+               'links_menu': get_links_menu(),
+               }
     if category_id:
         print(f'вы выбрали {category_id}')
         # products = Products.objects.filter(category_id=category_id).order_by('price')
