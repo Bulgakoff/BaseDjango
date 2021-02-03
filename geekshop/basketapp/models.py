@@ -19,7 +19,7 @@ class Basket(models.Model):
     created_timestamp = models.DateTimeField(auto_now_add=True)
 
     def get_items_basket_cached(self):
-        return Basket.objects.filter(user=self.user)
+        return Basket.objects.filter(user=self.user).select_related()
         # return self.user.basket_set.select_related()
 
     def __str__(self):
