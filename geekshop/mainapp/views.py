@@ -53,7 +53,7 @@ def products(request, category_id=None, page=1):
         # context.update({'products': products})
     else:
         # products = Products.objects.all().order_by('price')
-        products = Products.objects.filter(is_active=True, category__is_active=True, category_id=category_id).select_related(
+        products = Products.objects.filter(is_active=True, category__is_active=True).select_related(
             'category').order_by('price')
         # context.update({'products': products})
     paginator = Paginator(products, 3)
