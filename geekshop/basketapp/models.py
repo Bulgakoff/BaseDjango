@@ -29,7 +29,7 @@ class Basket(models.Model):
         return self.quantity * self.product.price
 
     def total_qu(self):
-        baskets = self.get_items_basket_cached
+        baskets = self.get_items_basket_cached()
         return sum(basket.quantity for basket in baskets)
 
     def total_summa(self):
