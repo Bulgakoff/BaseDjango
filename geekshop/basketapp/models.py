@@ -19,6 +19,7 @@ class Basket(models.Model):
     product = models.ForeignKey(Products, on_delete=models.CASCADE)
     quantity = models.PositiveSmallIntegerField(default=0)
     created_timestamp = models.DateTimeField(auto_now_add=True)
+
     @cached_property
     # @property
     def get_items_basket_cached(self):
@@ -33,12 +34,14 @@ class Basket(models.Model):
 
     def total_qu(self):
         # baskets = Basket.objects.filter(user=self.user)
-        baskets = self.get_items_basket_cached
+        baskets = self.get_items_basket_cached  # если используется @cached_property  стр.23 кэшировани
+        # е то обращение происходит не как к методу а как к свойству
         return sum(basket.quantity for basket in baskets)
 
     def total_summa(self):
         # baskets = Basket.objects.filter(user=self.user)
-        baskets = self.get_items_basket_cached
+        baskets = self.get_items_basket_cached  # если используется @cached_property кэширование
+        # то обращение происходит не как к методу а как к свойству
         return sum(basket.summa_product() for basket in baskets)
 
     # def delete(self):
