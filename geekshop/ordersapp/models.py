@@ -46,7 +46,8 @@ class Order(models.Model):
 
     def get_total_quantity(self):
         # baskets = Basket.objects.filter(user=self.user)
-        baskets = self.orderitems.select_related()
+        # baskets = self.orderitems.select_related()
+        baskets = OrderItems.order.select_related()
         return sum(basket.quantity for basket in baskets)
 
     def get_total_summ(self):
