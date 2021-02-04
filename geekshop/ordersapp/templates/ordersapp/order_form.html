@@ -1,12 +1,12 @@
 {% extends "ordersapp/base.html" %}
 {% load static %}
-{% load cache %}
+{#{% load cache %}#}
 
 
 {% block content %}
     {% include 'ordersapp/includes/inc_order_summary.html' %}
     <div class="order_form" style="margin: 100px">
-    <form action="" method="post">
+        <form action="" method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <table class="table">
@@ -35,19 +35,18 @@
                                 {% if field.name == 'price' %}
                                     {% if field.value %}
                                         <span class="orderitems-{{ forloop.parentloop.counter0 }}-price">
-                                            {{ field.value }}
+                                            {{ field.value }}{#show price fields#}
                                         </span>руб.
                                     {% endif %}
                                 {% else %}
 
-                                    {% if field.name == 'product' %}
-                                        {% cache 3600 orderitemform_product field.value %}
-                                        {{ field }}
-                                        {% endcache %}
-
-                                        {% else %}
-                                    {{ field }}
-                                    {% endif %}
+                                    {#                                    {% if field.name == 'product' %}#}
+                                    {#                                        {% cache 3600 orderitemform_product field.value %}#}
+                                    {#                                            {{ field }}#}
+                                    {#                                        {% endcache %}#}
+                                    {#                                    {% else %}#}
+                                    {{ field }}{#show others fields#}
+                                    {#                                    {% endif %}#}
                                 {% endif %}
                             </td>
                         {% endfor %}
@@ -61,11 +60,11 @@
 
             {% include 'ordersapp/includes/inc_order_actions.html' %}
         </form>
-    {#        <button class="btn btn-default btn-round form-control last" >#}
-    {#            <a href="{% url 'main' %}">#}
-    {#                <button>на главную</button>#}
-    {#            </a>#}
-    {#        </button>#}
+        {#        <button class="btn btn-default btn-round form-control last" >#}
+        {#            <a href="{% url 'main' %}">#}
+        {#                <button>на главную</button>#}
+        {#            </a>#}
+        {#        </button>#}
     </div>
 
 {% endblock %}
