@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 from basketapp.models import Basket
 from geekshop import settings
 from mainapp.models import Products
