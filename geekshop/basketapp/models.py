@@ -5,16 +5,16 @@ from authapp.models import User
 from mainapp.models import Products
 
 
-class BasketQuerySet(models.QuerySet):
-    def delete(self):
-        for object in self:
-            object.product.guantity += object.quantity
-            object.product.save()
-        super(BasketQuerySet, self).delete()
+# class BasketQuerySet(models.QuerySet):
+#     def delete(self):
+#         for object in self:
+#             object.product.guantity += object.quantity
+#             object.product.save()
+#         super(BasketQuerySet, self).delete()
 
 
 class Basket(models.Model):
-    objects = BasketQuerySet.as_manager()
+    # objects = BasketQuerySet.as_manager()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Products, on_delete=models.CASCADE)
     quantity = models.PositiveSmallIntegerField(default=0)
