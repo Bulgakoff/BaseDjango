@@ -8,7 +8,7 @@ from mainapp.models import ProductCategory, Products
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def get_links_menu():
-    if settings.LOW_CACHE:
+    if settings.LOW_CACHE:# переключатель
         key = 'links_menu'
         links_menu=cache.get(key)
         if links_menu is None:
@@ -21,7 +21,7 @@ def get_links_menu():
         return ProductCategory.objects.filter(is_active=True)
 
 def get_category(pk):
-    if settings.LOW_CACHE:
+    if settings.LOW_CACHE:# переключатель
         key = f'category_{pk}'
         category = cache.get(key)
         if category is None:
