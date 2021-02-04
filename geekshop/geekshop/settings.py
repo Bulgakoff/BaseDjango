@@ -51,12 +51,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    'django.middleware.cache.FetchFromCacheMiddleware',
-
     'social_django.middleware.SocialAuthExceptionMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',#for entire site caching
 
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware',#for entire site caching
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
+
 ]
 if DEBUG:
     def show_toolbar(request):
