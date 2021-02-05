@@ -33,14 +33,14 @@ class Basket(models.Model):
         return self.quantity * self.product.price
 
     def total_qu(self):
-        # baskets = Basket.objects.filter(user=self.user)
-        baskets = self.get_items_basket_cached  # если используется @cached_property  стр.23 кэшировани
+        baskets = Basket.objects.filter(user=self.user)
+        # baskets = self.get_items_basket_cached  # если используется @cached_property  стр.23 кэшировани
         # е то обращение происходит не как к методу а как к свойству
         return sum(basket.quantity for basket in baskets)
 
     def total_summa(self):
-        # baskets = Basket.objects.filter(user=self.user)
-        baskets = self.get_items_basket_cached  # если используется @cached_property кэширование
+        baskets = Basket.objects.filter(user=self.user)
+        # baskets = self.get_items_basket_cached  # если используется @cached_property кэширование
         # то обращение происходит не как к методу а как к свойству
         return sum(basket.summa_product() for basket in baskets)
 
