@@ -20,7 +20,7 @@ class Basket(models.Model):
     quantity = models.PositiveSmallIntegerField(default=0)
     created_timestamp = models.DateTimeField(auto_now_add=True)
 
-    # @cached_property
+    @cached_property
     # @property
     def get_items_basket_cached(self):
         return Basket.objects.filter(user=self.user).select_related()
