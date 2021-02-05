@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # 'django.middleware.cache.UpdateCacheMiddleware',#for entire site caching
+    'django.middleware.cache.UpdateCacheMiddleware',#for entire site caching
 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'social_django.middleware.SocialAuthExceptionMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 
-    # 'django.middleware.cache.FetchFromCacheMiddleware',#for entire site caching
+    'django.middleware.cache.FetchFromCacheMiddleware',#for entire site caching
 
 ]
 if DEBUG:
