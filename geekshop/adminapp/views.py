@@ -1,3 +1,5 @@
+from django.db import connection
+from django.db.models import F
 from django.shortcuts import render, HttpResponseRedirect
 from authapp.models import User
 from mainapp.models import ProductCategory
@@ -105,6 +107,16 @@ class CategoryUpdateView(UpdateView):
     success_url = reverse_lazy('admin_staff:admin_category')
     form_class = CategoryAdminUpdateForm
 
+    def form_valid(self, form):
+        if 'discount' in form.cleaned_data:
+            discount = form.cleaned_data['discount']
+            if discount:
+                print(f'применияется скидка {discount}% к товарам категории {self.object.name}')
+                self.object.product_set.update(price=F('price') * (1 - discount / 100))# !!!!!!!!!!!!!!!1
+                db_profile_by_type(self.__class__, 'UPDATE', connection.queries)
+
+        return super().form_valid(form)
+
 
 class CategoryDeleteView(DeleteView):
     model = ProductCategory
@@ -138,6 +150,12 @@ class ProductsCreateView(CreateView):
     @method_decorator(user_passes_test(lambda user: user.is_superuser))
     def dispatch(self, request, *args, **kwargs):
         return super(ProductsCreateView, self).dispatch(request, *args, **kwargs)
+
+
+def db_profile_by_type(prefix, type, queries):
+    update_queries = list(filter(lambda x: type in x['sql'], queries))
+    print(f'db_profile {type} for {prefix}:')
+    [print(query['sql']) for query in update_queries]
 
 
 class ProductsUpdateView(UpdateView):

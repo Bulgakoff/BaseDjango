@@ -1,3 +1,4 @@
+from django.db.models import F
 from django.shortcuts import HttpResponseRedirect, get_object_or_404
 from mainapp.models import Products
 from basketapp.models import Basket
@@ -17,7 +18,8 @@ def basket_add(request, id_product=None):
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         basket = baskets.first()
-        basket.quantity += 1
+        # basket.quantity += 1
+        basket.quantity = F('quantity')-1
         basket.save()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 

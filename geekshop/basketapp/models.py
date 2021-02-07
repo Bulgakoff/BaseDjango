@@ -32,6 +32,10 @@ class Basket(models.Model):
         baskets = Basket.objects.filter(user=self.user)
         return sum(basket.summa_product() for basket in baskets)
 
+    @staticmethod
+    def get_product(user,product):
+        return Basket.objects.filter(user=user,product=product).order_by('price')
+
     # def delete(self):
     #     self.product.guantity += self.quantity
     #     self.product.save()

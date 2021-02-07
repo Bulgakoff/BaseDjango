@@ -31,6 +31,8 @@ class CategoryAdminRegisterForm(forms.ModelForm):
 
 
 class CategoryAdminUpdateForm(CategoryAdminRegisterForm):
+    discount = forms.IntegerField(label='скидка', required=False, min_value=0, max_value=90, initial=0)
+
     def __init__(self, *args, **kwargs):
         super(CategoryAdminUpdateForm, self).__init__(*args, **kwargs)
 

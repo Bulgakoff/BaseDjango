@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import HttpResponseRedirect, get_object_or_404
 from mainapp.models import ProductCategory, Products
@@ -20,6 +21,8 @@ def products(request, category_id=None, page=1):
         products = Products.objects.filter(category_id=category_id).order_by('price')
         # context.update({'products': products})
     else:
+        # products = Products.objects.filter(Q(category_id=1) | Q(category_id=2)).order_by('price')
+        # products = Products.objects.filter(is_active=True).order_by('price')
         products = Products.objects.all().order_by('price')
         # context.update({'products': products})
     paginator = Paginator(products, 3)
