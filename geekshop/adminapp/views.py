@@ -107,12 +107,17 @@ class CategoryUpdateView(UpdateView):
     success_url = reverse_lazy('admin_staff:admin_category')
     form_class = CategoryAdminUpdateForm
 
+    def get_context_data(self, **kwargs):
+        context = super(CategoryUpdateView, self).get_context_data(**kwargs)
+        context['title'] = 'кАтегории/редактирование'
+        return context
+
     def form_valid(self, form):
         if 'discount' in form.cleaned_data:
             discount = form.cleaned_data['discount']
             if discount:
                 print(f'применияется скидка {discount}% к товарам категории {self.object.name}')
-                self.object.product_set.update(price=F('price') * (1 - discount / 100))# !!!!!!!!!!!!!!!1
+                self.object.products_set.update(price=F('price') * (1 - discount / 100))
                 db_profile_by_type(self.__class__, 'UPDATE', connection.queries)
 
         return super().form_valid(form)
