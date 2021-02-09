@@ -1,3 +1,4 @@
+from django.db import connection
 from django.db.models import F
 from django.shortcuts import HttpResponseRedirect, get_object_or_404
 from mainapp.models import Products
@@ -17,10 +18,23 @@ def basket_add(request, id_product=None):
         basket.save()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
+        # """
+        # UPDATE "basketapp_basket"
+        # SET
+        # "user_id" = 1,
+        # "product_id" = 10,
+        # "quantity" = 2,
+        # "created_timestamp" = \'2021-02-09 10:26:11.886372\'
+        # WHERE
+        # "basketapp_basket"
+        # """
+        # "quantity" = ("basketapp_basket"."quantity" - 1),
         basket = baskets.first()
         # basket.quantity += 1
-        basket.quantity = F('quantity')-1
+        basket.quantity = F('quantity') + 1
         basket.save()
+        update_queries = list(filter(lambda x: 'UPDATE' in x['sql'], connection.queries))
+        print(f'query basket_app xxx---+++++*****++++++-> {update_queries}')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
