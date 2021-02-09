@@ -174,13 +174,14 @@ def order_forming_complete(request, pk):
 #         else:
 #             instance.product.guantity -= instance.quantity
 #         instance.product.save()
-
-
+#
+#
 # @receiver(pre_delete, sender=Basket)
 # @receiver(pre_delete, sender=OrderItems)
 # def product_quantity_update_delete(sender, instance, **kwargs):
 #     instance.product.guantity += instance.quantity
 #     instance.product.save()
+
 def get_product_price(request, pk):
     if request.is_ajax():
         product_item = Products.objects.filter(pk=int(pk)).first()
