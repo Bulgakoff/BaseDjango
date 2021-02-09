@@ -57,6 +57,8 @@ class Command(BaseCommand):
                 output_field=DecimalField(),
             )).order_by('action_order', 'total_price').select_related()
 
+        print(f'---=----=--=-==-{OrderItems.objects.all()}')
+
         for orderitem in test_orders:
             print(f'{orderitem.action_order:2}: заказ №{orderitem.pk:3}:\
                    {orderitem.product.name:15}: скидка\
