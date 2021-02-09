@@ -23,12 +23,12 @@ def basket_add(request, id_product=None):
         # SET
         # "user_id" = 1,
         # "product_id" = 10,
-        # "quantity" = 2,
+        # "quantity" = 2,------>(# "quantity" = ("basketapp_basket"."quantity" - 1),)
         # "created_timestamp" = \'2021-02-09 10:26:11.886372\'
         # WHERE
         # "basketapp_basket"
         # """
-        # "quantity" = ("basketapp_basket"."quantity" - 1),
+
         basket = baskets.first()
         # basket.quantity += 1
         basket.quantity = F('quantity') + 1

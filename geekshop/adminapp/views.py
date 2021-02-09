@@ -1,5 +1,7 @@
 from django.db import connection
 from django.db.models import F
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from django.shortcuts import render, HttpResponseRedirect
 from authapp.models import User
 from mainapp.models import ProductCategory
@@ -117,6 +119,7 @@ class CategoryUpdateView(UpdateView):
             discount = form.cleaned_data['discount']
             if discount:
                 print(f'применияется скидка {discount}% к товарам категории {self.object.name}')
+                print(f'-=-=-=-=-=-=-=->>> {self.object.products_set}-=-=-=->>>')
                 self.object.products_set.update(price=F('price') * (1 - discount / 100))
                 db_profile_by_type(self.__class__, 'UPDATE', connection.queries)
 
@@ -161,6 +164,17 @@ def db_profile_by_type(prefix, type, queries):
     update_queries = list(filter(lambda x: type in x['sql'], queries))
     print(f'db_profile {type} for {prefix}:')
     [print(query['sql']) for query in update_queries]
+
+
+@receiver(pre_save, sender=ProductCategory)
+def product_is_active_update_productcategory_save(sender, instance, **kwargs):
+    if instance.pk:
+        if instance.is_active:
+            instance.products_set.update(is_active=True)
+        else:
+            instance.products_set.update(is_active=False)
+
+        db_profile_by_type(sender, 'UPDATE', connection.queries)
 
 
 class ProductsUpdateView(UpdateView):
