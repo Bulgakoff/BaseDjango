@@ -22,22 +22,18 @@ class TestMainappTestCase(TestCase):
 
     def test_mainapp_pages(self):
         response = self.client.get('/')
-        print(f'====================>{response}')
         self.assertEqual(response.status_code, 200)
 
 
     def test_mainapp_shop(self):
         response = self.client.get('/products/')
-        print(f'====================>{response}')
         self.assertEqual(response.status_code, 200)
 
         response = self.client.get('/products/1/')
-        print(f'====================>{response}')
         self.assertEqual(response.status_code, 200)
 
         for category in ProductCategory.objects.all():
             response = self.client.get(f'/products/{category.pk}/')
-            print(f'====================>{response}')
             self.assertEqual(response.status_code, 200)
 
 class ProductsTestCase(TestCase):
