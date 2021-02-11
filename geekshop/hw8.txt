@@ -1,0 +1,80 @@
+1.	Исправить баг при управлении активностью категории. Активность товаров тоже должна обновляться.
+\geekshop\adminapp\views.py
+@receiver(pre_save, sender=ProductCategory)
+def product_is_active_update_productcategory_save(sender, instance, **kwargs):
+    if instance.pk:
+        if instance.is_active:
+            instance.products_set.update(is_active=True)
+        else:
+            instance.products_set.update(is_active=False)
+
+2.	Реализовать возможность сделать скидку на товары категории в админке при помощи метода «.update()».
+\geekshop\adminapp\views.py
+3.	if discount:
+    print(f'применияется скидка {discount}% к товарам категории {self.object.name}')
+    self.object.products_set.update(price=F('price') * (1 - discount / 100))
+    db_profile_by_type(self.__class__, 'UPDATE', connection.queries)
+
+3. Поработать с F-объектом, убедиться, что обновление значений выполняется на уровне БД, а не в python-коде.
+geekshop/basketapp/views.py
+# basket.quantity += 1
+basket.quantity = F('quantity') + 1
+basket.save()
+
+
+products = Products.objects.filter(Q(category_id=1) | Q(category_id=2)).order_by('price')
+
+# """
+# UPDATE "basketapp_basket"
+# SET
+# "user_id" = 1,
+# "product_id" = 10,
+# "quantity" = 2,------>(# "quantity" = ("basketapp_basket"."quantity" - 1),)
+# "created_timestamp" = \'2021-02-09 10:26:11.886372\'
+# WHERE
+# "basketapp_basket"
+# """
+
+4.	Написать несколько запросов с логическим «ИЛИ|. Написать сложный запрос в базу с использованием «conditional-expressions»
+5.	else:
+    products = Products.objects.filter(Q(category_id=1) | Q(category_id=2)).order_by('price')
+\geekshop\mainapp\management\commands\learn_db.py
+days, 22:10:59.406352
+ 3: заказ №  1:                   Синяя куртка The North Face: скидка                   296.56 руб. |                    5 days, 22:11:23.500085
+ 3: заказ № 83:                   Худи черного цвета с монограммами adidas Originals: скидка                   304.50 руб. |                    1 day, 23:00:39.255673
+
+(venv) C:\DjangoPr\projects\geekshop-server\geekshop\geekshop>
+ 81:                   Ralf Ringer    : скидка                   125.00 руб. |                    1 day, 23:00:39.255673
+ 3: заказ № 52:                   Коричневые Кроссовки на платформе с 3 парами люверсов Dr Martens 1461 Bex: скидка                   192.00 руб. |
+13 days, 22:10:59.406352
+ 3: заказ №  1:                   Синяя куртка The North Face: скидка                   296.56 руб. |                    5 days, 22:11:23.500085
+ 3: заказ № 83:                   Худи черного цвета с монограммами adidas Originals: скидка                   304.50 руб. |                    1 day, 23:00:39.255673
+
+5.	Провести тестирование работоспособности одного из приложений.
+\geekshop\geekshop\mainapp\tests.py
+(\geekshop\geekshop>.\manage.py test mainapp
+----------------------------------------------------------------------
+Ran 1 test in 0.169s
+
+OK
+Destroying test database for alias 'default'...
+6.	Протестировать процесс логина пользователя и переадресацию при доступе корзине.
+
+7.	Исправить ошибку в функции «get_hot_product()».
+
+
+8.	Написать тесты для методов моделей проекта.
+9.	def test_product_get(self
+10.	def test_product_print(self):
+11.	def test_product_get_items(self):
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.014s
+
+OK
+Destroying test database for alias 'default'...
+
+
+9. В качестве защиты курсового проекта необходимо записать в любой удобной для вас программе видеоролик (скринкаст) продолжительностью 1-5 минут. Представьте, что вам необходимо презентовать вашу работу заказчику или аудитории. В скринкасте расскажите о вашем проекте, продемонстрируйте его возможности и функционал. Ссылку на видео приложите к практическому заданию, например, в комментарии к уроку. И не забудьте открыть доступ на просмотр! :) Видеопрезентация продукта развивает у вас дополнительные мягкие навыки и является обязательной для засчитывания курсового проекта.
+
+
